@@ -1,0 +1,40 @@
+﻿
+@model LearningPortal.Models.CascadingClass
+@{
+
+    if (ViewBag.CateogryList != null)
+    {
+
+        @Html.DropDownListFor(m => m.CategoryId, ViewBag.CateogryList as SelectList, "Choose Category", new { @class = " form-control mb-3" })
+        
+    }
+
+    @Html.DropDownListFor(m => m.SubCategoryId, new SelectList(" "), "Choose SubCategory", new { @class = " form-control" })
+}
+
+
+<script src="~/assets/vendor/jquery.min.js"></script>
+
+<script>
+    $(document).ready(function () {
+        $("#SubCategoryId").empty();
+        $("#SubCategoryId").append("<option value=''>Choose SubCategory</option>");
+            $("#CategoryId").change(function () {
+                var categoryId = $(this).val();
+                if (categoryId != "") {
+                    $.get("/Admin/GetSubCategoriesList", { CategoryId: categoryId }, function (data) {
+                        $("#SubCategoryId").empty();
+                        $("#SubCategoryId").append("<option value=''>Choose SubCategory</option>");
+                        $.each(data, function (index, row) {
+                            $("#SubCategoryId").append("<option value='" + row.SubCategoryId + "'>" + row.SubCategoryName + "</option>");
+                        });
+                    });
+                }
+                else {
+                    $("#SubCategoryId").empty();
+                    $("#SubCategoryId").append("<option value=''>Choose SubCategory</option>");
+                }
+            })
+        });
+</script>
+

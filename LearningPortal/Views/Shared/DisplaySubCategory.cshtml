@@ -1,0 +1,19 @@
+﻿@model LearningPortal.Models.SubCategories
+
+<option value="">SubCategory</option>
+
+@{ if (ViewBag.SubCatList == null)
+    {
+        <option value="">SubCategory</option>
+
+    }
+    else
+    {
+        foreach (var item in ViewBag.SubCatList)
+        {
+            <option value="@item.Value">@item.Text</option>
+        }
+    }
+
+}
+

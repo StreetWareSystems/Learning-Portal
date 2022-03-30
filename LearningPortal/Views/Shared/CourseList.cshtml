@@ -1,0 +1,153 @@
+﻿@model IEnumerable<LearningPortal.Models.Courses>
+<title>Courses</title>
+
+@{
+    if (ViewBag.modelCount == 0)
+    {
+        <div class="media align-items-center mb-headings mt-5">
+            <div class="media-body">
+                <div class="flex"></div>
+                <h1 class="h2" style="text-align:center">No Course Available</h1>
+            </div>
+        </div>
+    }
+    else
+    {
+        <div class="card-columns row">
+            @foreach (var item in Model)
+            {
+
+                string que = helpper.Encrypt("" + item.CourseId, true);
+                que = que.Replace('%', 'a');
+                que = que.Replace('+', '!');
+            <div class="carousel-item col-sm-6 col-md-4 col-lg-3 active" id="row_@item.CourseId">
+
+                <div class="card" id="card_@item.CourseId">
+
+                    @{
+                        var d = item.CourseId;
+                    }
+
+
+                    <a href="@Url.Action("CoursePreView", "Admin", new { id =   que.Replace('/', '$') })" >
+                        <img src="~/assets/images/@item.Image"
+                             alt="Card image cap"
+                             style="width:100%;">
+
+                        <div class="card-header text-center px-0 px-sm-auto">
+                            <h5 class="card-title m-0" style="text-align:center; font-size:13px;">@item.CourseName</h5>
+                            <div>
+                                <div class="mt-3"></div>
+                                <small class="text-muted">Date Uploaded:@item.UploadedDate.Day/@item.UploadedDate.Month/@item.UploadedDate.Year </small>
+
+                            </div>
+                        </div>
+                    </a>
+                    <div class="card-body px-0">
+
+                        <div style="display: flex; justify-content: center;">
+
+                            <div class="d-flex justify-content-around w-75">
+                                <a title="Edit Course" href="@Url.Action("CourseUpdate", "Admin", new { id =   que.Replace('/', '$') })"
+                                   class="btn btn-white w-25"><i class="material-icons">create</i></a>
+                                <button title="Delete Course"
+                                        class="btn btn-white w-25" onclick="deleteCourse(@item.CourseId)">
+                                    <i class="material-icons">delete</i>
+                                </button>
+                                <button title="Mark As Featured"
+                                        class="btn btn-white w-25 featcheckbox" data-id="@item.CourseId">
+                                    @{ if (item.IsFeatured == true)
+                                        {
+
+                                            <i class="material-icons text-primary">check_box</i>
+                                        }
+                                        else
+                                        {
+                                            <i class="material-icons">check_box_outline_blank</i>
+                                        }
+                                    }
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+            }
+            </div>
+            }
+            }
+
+            <script>
+                $(document).ready(function () {
+                 
+
+                    $(".featcheckbox").click(function () {
+               
+                        var serialNumber = $(this).data('id');
+                        var element = $(this);
+                        $.ajax({
+                            type: "POST",
+                            url: "/Admin/MarkFeatureCourse",
+
+                            data: {
+                                Cid: serialNumber
+                            },
+                            success: function (response) {
+                                var txt = $(element).children().text();
+                                if (txt === "check_box") {
+                                    $(element).children().text("check_box_outline_blank").removeClass("text-primary");
+                                }
+                                else {
+                                    {
+                                        $(element).children().text("check_box").addClass("text-primary");
+                                    }
+                                }
+                            },
+                            error: function () {
+                                alert(error);
+                            }
+                        })
+                       
+                    });
+
+                })
+            </script>
+            <script>
+                function deleteCourse(CourseId) {
+
+                    $.ajax({
+                        type: "post",
+                        url: "/Admin/DeleCourse",
+                        data: {
+                            Catid: CourseId
+                        },
+
+                        success: function (data) {
+                            $(function () {
+                                $('#deleteModalCour').modal();
+                            });
+
+                            $('#modalWrapperDeleteCourse').html(data);
+
+
+                        }
+                    });
+                }
+                function CourseUpdate(CourseId)
+                {
+                   
+                    $.ajax({
+                        type: "post",
+                        url: "/admin/CourseUpdate",
+                        data: {
+                            courid: CourseId
+                        },
+
+                        success: function (data) {
+                           
+                        }
+                    });
+                }
+            </script>

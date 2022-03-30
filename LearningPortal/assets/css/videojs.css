@@ -1,0 +1,133 @@
+﻿/ GC STYLE MODIF /
+.vjs-control-bar {
+    font-size: 14px;
+}
+
+.video-js *, .video-js :after, .video-js :before {
+    box-sizing: content-box;
+}
+
+.video-js .vjs-control {
+    width: 3em !important;
+}
+
+
+.video-js .vjs-control {
+    width: 2.7em !important;
+}
+
+@media only screen and (max-width: 600px) {
+    .video-js .vjs-control {
+        width: 2rem !important;
+    }
+
+    .video-js .vjs-menu-button-inline:before {
+        width: 0.222222em;
+    }
+}
+
+
+
+/* GC STYLE MODIF END */
+.video-holder,
+.video-holder * {
+    box-sizing: border-box !important
+}
+
+.video-holder {
+    background: #1b1b1b;
+    padding: 10px
+}
+
+.centered {
+    width: 100%
+}
+
+#video {
+    border-radius: 8px
+}
+
+.video-holder .vjs-big-play-button {
+    left: 50%;
+    width: 100px;
+    margin-left: -50px;
+    height: 80px;
+    top: 50%;
+    margin-top: -40px
+}
+
+.video-js .vjs-big-play-button {
+    font-size: 3em;
+    line-height: 1.5em;
+    height: 1.5em;
+    width: 2em;
+    top: 40%;
+    left: 45%;
+}
+
+@media(max-width: 1326px) {
+    .video-js .vjs-big-play-button {
+        font-size: 3em;
+        line-height: 1.5em;
+        height: 1.5em;
+        width: 2em;
+        top: 40%;
+        left: 40%;
+        border-radius: 0.3em;
+    }
+}
+@media(min-width: 1600px) {
+    .video-js .vjs-big-play-button {
+        font-size: 4em;
+        line-height: 1.5em;
+        height: 1.5em;
+        width: 2em;
+        top: 40%;
+        left: 45%;
+        border-radius: 0.3em;
+    }
+}
+
+
+@media(min-width: 1800px) {
+    .video-js .vjs-big-play-button {
+        font-size: 4em;
+        line-height: 1.5em;
+        height: 1.5em;
+        width: 2em;
+        top: 40%;
+        left: 45%;
+        border-radius: 0.3em;
+    }
+}
+
+
+@media(min-width: 1900px) {
+    .video-js .vjs-big-play-button {
+        font-size: 5em;
+        line-height: 1.5em;
+        height: 1.5em;
+        width: 3em;
+        top: 45%;
+        left: 45%;
+        border-radius: 0.3em;
+    }
+}
+
+
+/* .video-js .icon-angle-right, .video-js .icon-angle-left {
+    /* FONT AWESOME ICONS */ 
+s.video-js .vjs-icon-previous-item, .video-js .vjs-icon-next-item
+
+{
+    /* VIDEOJS ICONS */
+    cursor: pointer;
+    -webkit-box-flex: none;
+    -moz-box-flex: none;
+    -webkit-flex: none;
+    -ms-flex: none;
+    flex: none;
+    /*     font-size: 8px;
+    margin-top: 3px !important; */
+}
+

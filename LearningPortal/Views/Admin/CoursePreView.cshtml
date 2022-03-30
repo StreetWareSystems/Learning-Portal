@@ -1,0 +1,337 @@
+﻿@model LearningPortal.Models.Courses
+@{
+    ViewBag.Title = "CoursePreView";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+<style>
+    .display-toggle {
+        position: relative;
+        top: 40px;
+        left: 10px;
+        cursor:pointer;
+    }
+</style>
+
+
+<input type="hidden" id="rootName1" value="@ViewBag.Placeholder" />
+<div class="mdk-drawer-layout__content page mr-3 ml-2">
+    <div id="videoModalWrapper">
+
+    </div>
+
+    <input type="text" hidden value="@Model.CourseId" id="CourseID" />
+
+    <div class="row">
+        <div class="col-md-8">
+
+            <div class="card-header">
+                <h4 class="card-title">Course Outline</h4>
+            </div>
+            <div class="card">
+                <ul class="nestable-list">
+                    <li class="nestable-item nestable-item-handle">
+
+                        @{
+                            
+                            var count2 = 1;
+                            foreach (var h in ViewBag.Section)
+                            {
+                                <input class="koi" type="hidden" id="@h.SectionId" value="@h.SectionId" />
+                                <hr />
+                                <span class="display-toggle">
+                                    <i class="material-icons" style="background: #39444d;color: white;border-radius: 50%;">arrow_drop_up</i>
+                                </span>
+                                <div class="nestable-content bg-light">
+
+                                    <div class="media-body">
+
+                                        <div class="media align-items-center">
+                                            <div class="media-body" id="Nested_Card">
+
+                                                <label > @h.SectionName </label>
+
+                                            </div>
+
+                                        </div>
+
+                                    </div>
+                                </div>
+                                <hr />
+                                <!--SubList-->
+
+                                //var sc = h.Replace(" ", string.Empty) + "sws";
+                                <ul class="ascaq list-unstyled ">
+                                    <li>
+                                        @foreach (var val in ViewBag.SectionMedia)
+                                        {
+
+                                            if (h.SectionId == val.SectionId)
+                                            {
+
+
+                                                <div class="nestable" id="nestable-handles-primary">
+                                                    <ul class="nestable-list">
+                                                        <li class="nestable-item nestable-item-handle"
+                                                            data-id="2">
+                                                            
+                                                            <div class="nestable-content mx-2">
+                                                                <div class="media align-items-center" id="@h">
+
+                                                                    <div class="media-body" id="Nested_Card">
+                                                                        <div class="card-title h6 mb-0">
+                                                                            @{
+
+                                                                                string filen = @val.VideoUrl;
+                                                                                int lastindex = @val.Videotype.IndexOf('/');
+
+                                                                                string extension = val.Videotype.Substring(lastindex);
+
+
+
+                                                                                string SectionName = h.SectionName;
+
+
+                                                                                <label> @val.VideoTitle </label>
+
+
+                                                                                <div class="ddd vc-time" >
+                                                                                    @{Html.RenderAction("gettime", "Admin", new { video = @filen, section = @SectionName, count1 = count2, extension = extension, check = "Preview" }); }
+
+                                                                                </div>
+
+                                                                                count2++;
+                                                                            }
+
+
+                                                                        </div>
+
+
+                                                                    </div>
+
+                                                                    <div class="media-right" id="@h.SectionName">
+                                                                        <a href="#"
+                                                                           class="btn btn-white btn-sm video" title="@val.VideoUrl" data-toggle="modal"
+                                                                           data-target="#exampleModal">
+                                                                            <i class="material-icons">visibility</i>
+                                                                        </a>
+
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </li>
+                                                    </ul>
+
+                                                </div>
+                                            }
+                                        }
+                                    </li>
+                                </ul>
+
+                            }
+                        }
+                        </li>
+                    </ul>
+
+</div>
+
+            @*<div class="modal fade" id="exampleModal" style="height:100vh;width:100vw">
+                <div class="modal-dialog vc-modal m-0 p-sm-0 p-3">
+                    <div class="modal-content">
+                        <div class="modal-header modal-header-vc">
+
+                            <button type="button" class="close ml-2" data-dismiss="modal" id="close">&times;</button>
+                        </div>
+
+                        <div class="modal-body">
+                            <video id="vemvo-player" controls width="100%" height="100%" src="~/assets/">
+                            </video>
+                        </div>
+                    </div>
+                </div>
+            </div>*@
+            <!--Teg Manager-->
+
+
+
+
+
+
+            <div class="TagManager">
+
+                <div class="card">
+                    <div class="card-header">
+                        <h4 class="card-title">Tags Manager</h4>
+                    </div>
+                    
+
+                    <div id="CTagManager">
+
+                        <div class="col-md-12">
+                            @foreach (var item in (List<String>)ViewBag.Span)
+                            {
+                                <button class="badge rounded-pill bg-primary tagtext py-2 px-3" value="@item" style="color: white;">@item </button>
+
+                            }
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+        <div class="col-md-4">
+
+            <!-- Image Upload And Preview Start-->
+            <div class="card">
+                <div class="card-body text-center">
+                    <div class="d-flex justify-content-center" style="height:200px">
+
+                            <img alt="Uploaded Image" src="~/assets/images/@Model.Image" />
+                       
+                    </div>
+                    
+                   
+                </div>
+            </div>
+            <!-- Image Upload And Preview End-->
+            <!-- Add Course Title and Logo Start -->
+            <div class="card">
+                <div class="card-body">
+
+
+
+                    <div class="form-group">
+                        <label class="form-label"
+                               for="title">Title</label>
+                        <div class="input-group">
+
+                            <label
+                                   class="form-control"
+                                   id="CourseTitle"
+                                   >@Model.CourseName
+                            </label>
+                        </div>
+                    </div>
+
+                    <div class="form-group mb-0">
+                        <div class="form-group">
+                            <label for="form-label">Description</label>
+
+                            <label style="height: auto; overflow-y: auto" class="form-control pl-4" id="CourseDescription" rows="3" placeholder="Write a title">@Html.Raw(Model.Description)</label>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+            <!-- Add Course Title and Logo End -->
+            <!--DropDowns start-->
+
+            <div class="card">
+                <div class="m-3">
+                    <label class="form-control"><strong>Year:</strong> @Model.Year  </label>
+
+                    <label class="form-control"><strong>Level:</strong>  @Model.Levels </label>
+                    <label class="form-control"><strong>CategoryName:</strong> @Model.SubCategories.Categories.CategoryName  </label>
+                    <label class="form-control"><strong>SubCategoryName:</strong>  @Model.SubCategories.SubCategoryName </label>
+                    
+                </div>
+              
+            </div>
+            <!--DropDowns End-->
+            <!--What I`ll You Learn start-->
+            <div class="card">
+                
+
+                <div class="card-body">
+                    <div class="card-header">
+                        <h4 class="card-title">What You`ll  Learn</h4>
+                    </div>
+
+                    <div class="row">
+
+                        <div class="ml-5">
+                            @foreach (var item in ViewBag.WWYLU)
+                            {
+                                @Html.Raw(@item)
+                            }
+                           
+                        </div>
+
+
+
+                    </div>
+
+
+
+                </div>
+
+            </div>
+            <!--What I`ll You Learn End-->
+            <!--Assignment Quiz Links start-->
+            <div class="card">
+
+                <div class="card-header align-items-center">
+                    <i class="material-icons text-muted ml-2">lightbulb </i><a href="#"> Take Quiz</a>
+                </div>
+                <div class="card-header align-items-center">
+                    <i class="material-icons text-muted ml-2">assignment</i><a href="#">  Get Assignment</a>
+                </div>
+                <div class="card-header align-items-center">
+                    <i class="material-icons text-muted ml-2">school</i><a href="#">  Get Certificate</a>
+                </div>
+            </div>
+            <!--Assignment Quiz Links start-->
+            <!--Last Submit Button Start-->
+          
+            <!--Last Submit Button End-->
+
+        </div>
+    </div>
+</div>
+
+<script>
+
+   
+   
+    $(document).ready(function () {
+        $(".display-toggle").click( function () {
+            $(this).nextAll(".ascaq").eq(0).slideToggle("slow");
+            if ($(this).children().text() === "arrow_drop_up") {
+                $(this).children().text("arrow_drop_down");
+            }
+            else
+                $(this).children().text("arrow_drop_up");
+
+        });
+        $("#close").click(function () {
+            $('#exampleModal').modal('hide');
+            $("#vemvo-player").trigger('pause');
+        });
+        
+
+        $('.video').click(function () {
+
+           
+            var root = $("#rootName1").val();
+
+
+            var subf = $(this).parent().attr('id');
+            var vi = $(this).attr('title');
+            var src = "/assets/videos/" + root + "/" + subf + "/" + vi;
+
+            console.log("hello",subf);
+            $('#vemvo-player').attr("src", src);
+
+
+        });
+
+       
+
+    });
+
+
+
+   
+</script>
+
+
+

@@ -1,0 +1,83 @@
+﻿
+@{
+    ViewBag.Title = "ViewAllSubCategory";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    <title>@ViewBag.BreadCrumbCat</title>
+}
+
+
+@model IEnumerable<LearningPortal.Models.SubCategories>
+
+
+
+
+<div class="mdk-drawer-layout__content page mt-5">
+
+    @{ if (ViewBag.BreadCrumbCat != "")
+        {
+            <ol class="breadcrumb">
+
+
+                <li class="breadcrumb-item"><a href="#">@ViewBag.BreadCrumbCat</a> </li>
+
+                <li class="breadcrumb-item active">ViewAll</li>
+            </ol>
+
+
+            <div class="media align-items-center mb-headings">
+                <div class="media-body">
+                    <h1 class="h2">Sub Categories</h1>
+                </div>
+            </div>
+        }
+        else
+        {
+            <div class="media align-items-center mb-headings">
+                <div class="media-body">
+                    <h1 class="h2">No Sub Category Available</h1>
+                </div>
+            </div>
+        }
+    }
+
+
+    <div class="clearfix"></div>
+
+    <div class="card-columns row">
+        @{ foreach (var item in Model)
+            {
+                string que = helpper.Encrypt("" + item.SubCategoryId, true);
+                que = que.Replace('%', 'a');
+                que = que.Replace('+', '!');
+                <div class="carousel-item  col-sm-6 col-md-4 col-lg-3  active">
+
+                    <a href="@Url.Action("ViewAllCourse", "Home", new { id = que.Replace('/', '$') })">
+                        <div class="card card-sm">
+
+                            <div class="position-relative">
+                                <div class="card-img-top">
+                                    <img src="~/assets/images/Subcategories/@item.Image"
+                                         class="card-img-top">
+                                </div>
+
+                            </div>
+                            <div class="card-body d-flex">
+                                <div class="flex">
+
+                                    <h5 class="card-title m-0" style="text-align:center; font-weight:bold">@item.SubCategoryName</h5>
+
+
+                                </div>
+
+                            </div>
+                        </div>
+                </div>
+
+            }
+        }
+    </div>
+
+</div>
+
+
+

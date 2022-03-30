@@ -1,0 +1,591 @@
+﻿
+@model IEnumerable<LearningPortal.Models.Courses>
+@{
+    ViewBag.Title = "Dashboard";
+    <title>Dashboard</title>
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+<div class="container-fluid page__container mt-5">
+
+    @{
+
+        if (ViewBag.count > 4)
+        {<br />
+            <div class="media mb-headings align-items-center ">
+                <div class="media-body mt-2">
+                    <h1 class="h2">Resume Courses</h1>
+                </div>
+
+            </div>
+            <div id="carouselId" class="carousel s slide" data-type="carousel">
+                <!--
+                <ol class="carousel-indicators">
+                    <li data-target="#carouselId" data-slide="prev"></li>
+                    <li data-target="#carouselId" data-slide="next"></li>
+
+                </ol>
+                -->
+                <div class="carousel-inner row w-100" role="listbox">
+                    @{
+                        bool first = true;
+
+
+                        foreach (var item in ViewBag.rc)
+                        {
+                            if (first)
+                            {
+                                string que = helpper.Encrypt("" + item.CourseId, true);
+                                que = que.Replace('%', 'a');
+                                que = que.Replace('+', '!');
+
+                                <div class="carousel-item  col-sm-6 col-md-4 col-lg-3 active">
+                                    <a href="@Url.Action("Course", "Home", new { id =   que.Replace('/', '$') })">
+                                        <div class="card card-sm">
+                                            <div class="position-relative">
+                                                <div class="card-img-top">
+                                                    <img src="~/assets/images/@item.Image"
+                                                         class="card-img-top">
+                                                </div>
+
+                                            </div>
+                                            <div class="card-body d-flex">
+                                                <div class="flex">
+
+
+                                                    <h5 class="card-title m-0" style="text-align:center; font-size:13px;">@item.CourseName</h5>
+                                                    <h5 class="card-title m-0">
+                                                        <small class="text-muted">
+                                                            Level:   @{
+                                                                if (item.Levels == "Easy")
+                                                                {
+                                                                    <span class="badge badge-primary ">@item.Levels</span>
+                                                                }
+                                                                else if (item.Levels == "Medium")
+                                                                {
+                                                                    <span class="badge badge-warning ">@item.Levels</span>
+                                                                }
+                                                                else if (item.Levels == "Hard")
+                                                                {
+                                                                    <span class="badge badge-danger ">@item.Levels</span>
+                                                                }
+                                                            }
+                                                        </small>
+                                                    </h5>
+                                                    <h5 class="card-title m-0"> <small class="text-muted">Year:   @item.Year  </small> </h5>
+                                                    <h5 class="card-title m-0"> <small class="text-muted">Year: @item.Levels </small> </h5>
+                                                    @{var totalvideo = 0;
+                                                        foreach (var item1 in item.Sections)
+                                                        {
+
+                                                            foreach (var item2 in item1.SectionMedia)
+                                                            {
+                                                                totalvideo = totalvideo + item2.VideoDuration;
+
+                                                            }
+
+                                                        } }
+                                                    <h5 class="card-title m-0"> <small class="text-muted">Duration: @{Html.RenderAction("FormatTime", "Home", new { time = totalvideo });}  </small> </h5>
+
+                                                    <div class="row">
+                                                        <div class="col-lg-8  col-sm-8 col-md-8 col-xs-md-8">
+                                                            <div class="progress" style="margin-left:2px; margin-top:10px;">
+                                                                <div class="progress-bar bg-success" role="progressbar" style="width: @{Html.RenderAction("Progress", "Home", new { courseid = item.CourseId });}%" aria-valuenow="@{Html.RenderAction("Progress", "Home", new { courseid = item.CourseId });}" aria-valuemin="0" aria-valuemax="100"></div>
+                                                            </div>
+
+                                                        </div>
+                                                        <div class="col-lg-4 col-sm-4 col-md-4 col-xs-md-4">
+                                                            <small class="ml"><strong> @{Html.RenderAction("Progress", "Home", new { courseid = item.CourseId });}%</strong></small>
+                                                        </div>
+                                                    </div>
+
+                                                </div>
+
+                                            </div>
+                                        </div>
+                                    </a>
+                                </div>
+                                                                    first = false;
+                                                                }
+                                                                else
+                                                                {
+                                                                    string que = helpper.Encrypt("" + item.CourseId, true);
+                                                                    que = que.Replace('%', 'a');
+                                                                    que = que.Replace('+', '!');
+
+                                <div class="carousel-item  col-sm-6 col-md-4 col-lg-3">
+
+                                    <a href="@Url.Action("Course", "Home", new { id =   que.Replace('/', '$') })">
+                                        <div class="card card-sm">
+                                            <div class="position-relative">
+                                                <div class="card-img-top">
+                                                    <img src="~/assets/images/@item.Image"
+                                                         class="card-img-top">
+                                                </div>
+
+                                            </div>
+                                            <div class="card-body d-flex">
+                                                <div class="flex">
+
+                                                    <h5 class="card-title m-0" style="text-align:center; font-size:13px;">@item.CourseName</h5>
+                                                    <h5 class="card-title m-0">
+                                                        <small class="text-muted">
+                                                            Level:   @{
+                                                                if (item.Levels == "Easy")
+                                                                {
+                                                                    <span class="badge badge-primary ">@item.Levels</span>
+                                                                }
+                                                                else if (item.Levels == "Medium")
+                                                                {
+                                                                    <span class="badge badge-warning ">@item.Levels</span>
+                                                                }
+                                                                else if (item.Levels == "Hard")
+                                                                {
+                                                                    <span class="badge badge-danger ">@item.Levels</span>
+                                                                }
+                                                            }
+                                                        </small>
+                                                    </h5>
+                                                    <h5 class="card-title m-0"> <small class="text-muted">Year:   @item.Year </small> </h5>
+                                                    <h5 class="card-title m-0"> <small class="text-muted">Year: @item.Levels </small> </h5>
+                                                    @{var totalvideo = 0;
+                                                        foreach (var item1 in item.Sections)
+                                                        {
+
+                                                            foreach (var item2 in item1.SectionMedia)
+                                                            {
+                                                                totalvideo = totalvideo + item2.VideoDuration;
+
+                                                            }
+
+                                                        } }
+                                                    <h5 class="card-title m-0"> <small class="text-muted">Duration: @{Html.RenderAction("FormatTime", "Home", new { time = totalvideo });}  </small> </h5>
+
+                                                    <div class="row">
+                                                        <div class="col-lg-8  col-sm-8 col-md-8 col-xs-md-8">
+                                                            <div class="progress" style="margin-left:2px; margin-top:10px;">
+                                                                <div class="progress-bar bg-success" role="progressbar" style="width: @{Html.RenderAction("Progress", "Home", new { courseid = item.CourseId });}%" aria-valuenow="@{Html.RenderAction("Progress", "Home", new { courseid = item.CourseId });}" aria-valuemin="0" aria-valuemax="100"></div>
+                                                            </div>
+
+                                                        </div>
+                                                        <div class="col-lg-4 col-sm-4 col-md-4 col-xs-md-4">
+                                                            <small class="ml"><strong> @{Html.RenderAction("Progress", "Home", new { courseid = item.CourseId });}%</strong></small>
+                                                        </div>
+                                                    </div>
+
+                                                </div>
+
+                                            </div>
+                                        </div>
+                                    </a>
+                                </div>
+                            }
+
+                        }
+
+                    }
+                </div>
+                <a class=" left1 carousel-control-prev" href="#carouselId" role="button" data-slide="prev">
+                    <span class="carousel-control-prev-icon" aria-hidden="true">   <i class="fa fa-caret-left"> </i></span>
+                    <span class="sr-only">Previous</span>
+                </a>
+                <a class=" right1 carousel-control-next" href="#carouselId" role="button" data-slide="next">
+                    <span class="carousel-control-next-icon" aria-hidden="true">   <i class="fa fa-caret-right"> </i></span>
+                    <span class="sr-only">Next</span>
+                </a>
+            </div>
+        }
+        else if (ViewBag.count > 0 && ViewBag.count <= 4)
+        {
+            <br />
+            <div class="media mb-headings align-items-center ">
+                <div class="media-body mt-2">
+                    <h1 class="h2">Resume Courses</h1>
+                </div>
+
+            </div>
+            <div id="carouselId" class="carousel s slide" data-type="carousel">
+                <!--
+                <ol class="carousel-indicators">
+                    <li data-target="#carouselId" data-slide="prev"></li>
+                    <li data-target="#carouselId" data-slide="next"></li>
+
+                </ol>
+                -->
+                <div class="carousel-inner row w-100 " role="listbox">
+                    @{
+
+
+
+                        foreach (var item in ViewBag.rc)
+                        {
+
+                            string que = helpper.Encrypt("" + item.CourseId, true);
+                            que = que.Replace('%', 'a');
+                            que = que.Replace('+', '!');
+
+                            <div class="carousel-item  col-6 col-md-4 col-lg-3  active">
+                                <a href="@Url.Action("Course", "Home", new { id =   que.Replace('/', '$') })">
+                                    <div class="card card-sm">
+                                        <div class="position-relative">
+                                            <div class="card-img-top">
+                                                <img src="~/assets/images/@item.Image"
+                                                     class="card-img-top">
+                                            </div>
+
+                                        </div>
+                                        <div class="card-body d-flex">
+                                            <div class="flex">
+
+                                                <h5 class="card-title m-0" style="text-align:center; font-size:13px;">@item.CourseName</h5>
+                                                <h5 class="card-title m-0">
+                                                    <small class="text-muted">
+                                                        Level:   @{
+                                                            if (item.Levels == "Easy")
+                                                            {
+                                                                <span class="badge badge-primary ">@item.Levels</span>
+                                                            }
+                                                            else if (item.Levels == "Medium")
+                                                            {
+                                                                <span class="badge badge-warning ">@item.Levels</span>
+                                                            }
+                                                            else if (item.Levels == "Hard")
+                                                            {
+                                                                <span class="badge badge-danger ">@item.Levels</span>
+                                                            }
+                                                        }
+                                                    </small>
+                                                </h5>
+                                                <h5 class="card-title m-0"> <small class="text-muted">Year:   @item.Year </small> </h5>
+                                                <h5 class="card-title m-0"> <small class="text-muted">Year: @item.Levels </small> </h5>
+                                                @{var totalvideo = 0;
+                                                    foreach (var item1 in item.Sections)
+                                                    {
+
+                                                        foreach (var item2 in item1.SectionMedia)
+                                                        {
+                                                            totalvideo = totalvideo + item2.VideoDuration;
+
+                                                        }
+
+                                                    } }
+                                                <h5 class="card-title m-0"> <small class="text-muted">Duration: @{Html.RenderAction("FormatTime", "Home", new { time = totalvideo });}  </small> </h5>
+
+                                                <div class="row">
+                                                    <div class="col-lg-8  col-sm-8 col-md-8 col-xs-md-8">
+                                                        <div class="progress" style="margin-top:10px;">
+                                                            <div class="progress-bar bg-success" role="progressbar" style="width: @{Html.RenderAction("Progress", "Home", new { courseid = item.CourseId });}%" aria-valuenow="@{Html.RenderAction("Progress", "Home", new { courseid = item.CourseId });}" aria-valuemin="0" aria-valuemax="100"></div>
+                                                        </div>
+
+                                                    </div>
+                                                    <div class="col-lg-4 col-sm-4 col-md-4 col-xs-md-4">
+                                                        <small class="abc"><strong> @{Html.RenderAction("Progress", "Home", new { courseid = item.CourseId });}%</strong></small>
+                                                    </div>
+                                                </div>
+
+                                            </div>
+
+                                        </div>
+                                    </div>
+                                </a>
+                            </div>
+
+                        }
+
+                    }
+                </div>
+
+            </div>
+        }
+        else
+        {
+            <br />
+        }
+    }
+
+
+
+
+    @{
+
+        if (ViewBag.fc > 4)
+        {
+
+            <div class="media mb-headings align-items-center ">
+                <div class="media-body">
+                    <h1 class="h2">Featured Courses</h1>
+                </div>
+            </div>
+            <div id="carouselId1" class="carousel r slide" data-type="carousel">
+                <!--
+                <ol class="carousel-indicators">
+                    <li data-target="#carouselId" data-slide="prev"></li>
+                    <li data-target="#carouselId" data-slide="next"></li>
+
+                </ol>
+                -->
+                <div class="carousel-inner row w-100 " role="listbox">
+                    @{
+                        bool first = true;
+
+
+                        foreach (var item in Model)
+                        {
+                            if (first)
+                            {
+
+                                string que = helpper.Encrypt("" + item.CourseId, true);
+                                que = que.Replace('%', 'a');
+                                que = que.Replace('+', '!');
+                                <div class="carousel-item  col-sm-6 col-md-4 col-lg-3 active">
+                                    <a href="@Url.Action("Course", "Home", new { id =   que.Replace('/', '$') })">
+                                        <div class="card card-sm">
+                                            <div class="position-relative">
+                                                <div class="card-img-top">
+                                                    <img src="~/assets/images/@item.Image"
+                                                         class="card-img-top">
+                                                </div>
+
+                                            </div>
+                                            <div class="card-body d-flex">
+                                                <div class="flex">
+
+
+                                                    <h5 class="card-title m-0" style="text-align:center; font-size:13px;">@item.CourseName</h5>
+                                                    <h5 class="card-title m-0">
+                                                        <small class="text-muted">
+                                                            Level:   @{
+                                                                if (item.Levels == "Easy")
+                                                                {
+                                                                    <span class="badge badge-primary ">@item.Levels</span>
+                                                                }
+                                                                else if (item.Levels == "Medium")
+                                                                {
+                                                                    <span class="badge badge-warning ">@item.Levels</span>
+                                                                }
+                                                                else if (item.Levels == "Hard")
+                                                                {
+                                                                    <span class="badge badge-danger ">@item.Levels</span>
+                                                                }
+                                                            }
+                                                        </small>
+                                                    </h5>
+                                                    <h5 class="card-title m-0"> <small class="text-muted">Year:   @item.Year </small> </h5>
+                                                    @{var totalvideo = 0;
+                                                        foreach (var item1 in item.Sections)
+                                                        {
+
+                                                            foreach (var item2 in item1.SectionMedia)
+                                                            {
+                                                                totalvideo = totalvideo + item2.VideoDuration;
+
+                                                            }
+
+                                                        } }
+                                                    <h5 class="card-title m-0"> <small class="text-muted">Duration: @{Html.RenderAction("FormatTime", "Home", new { time = totalvideo });}  </small> </h5>
+
+                                                </div>
+
+                                            </div>
+                                        </div>
+                                    </a>
+                                </div>
+                                                            first = false;
+                                                        }
+                                                        else
+                                                        {
+                                                            string que = helpper.Encrypt("" + item.CourseId, true);
+                                                            que = que.Replace('%', 'a');
+                                                            que = que.Replace('+', '!');
+
+                                <div class="carousel-item  col-sm-6 col-md-4 col-lg-3">
+                                    <a href="@Url.Action("Course", "Home", new { id =   que.Replace('/', '$') })">
+                                        <div class="card card-sm">
+                                            <div class="position-relative">
+                                                <div class="card-img-top">
+                                                    <img src="~/assets/images/@item.Image"
+                                                         class="card-img-top">
+                                                </div>
+
+                                            </div>
+                                            <div class="card-body d-flex">
+                                                <div class="flex">
+
+
+                                                    <h5 class="card-title m-0" style="text-align:center; font-size:13px;">@item.CourseName</h5>
+                                                    <h5 class="card-title m-0">
+                                                        <small class="text-muted">
+                                                            Level:   @{
+                                                                if (item.Levels == "Easy")
+                                                                {
+                                                                    <span class="badge badge-primary ">@item.Levels</span>
+                                                                }
+                                                                else if (item.Levels == "Medium")
+                                                                {
+                                                                    <span class="badge badge-warning ">@item.Levels</span>
+                                                                }
+                                                                else if (item.Levels == "Hard")
+                                                                {
+                                                                    <span class="badge badge-danger ">@item.Levels</span>
+                                                                }
+                                                            }
+                                                        </small>
+                                                    </h5>
+                                                    <h5 class="card-title m-0"> <small class="text-muted">Year:   @item.Year </small> </h5>
+                                                    @{var totalvideo = 0;
+                                                        foreach (var item1 in item.Sections)
+                                                        {
+
+                                                            foreach (var item2 in item1.SectionMedia)
+                                                            {
+                                                                totalvideo = totalvideo + item2.VideoDuration;
+
+                                                            }
+
+                                                        } }
+                                                    <h5 class="card-title m-0"> <small class="text-muted">Duration: @{Html.RenderAction("FormatTime", "Home", new { time = totalvideo });}  </small> </h5>
+
+                                                </div>
+
+                                            </div>
+                                        </div>
+                                    </a>
+                                </div>
+                            }
+
+                        }
+
+                    }
+                </div>
+                <a class=" left carousel-control-prev" href="#carouselId1" role="button" data-slide="prev">
+                    <span class="carousel-control-prev-icon" aria-hidden="true">   <i class="fa fa-caret-left"> </i></span>
+                    <span class="sr-only">Previous</span>
+                </a>
+                <a class=" right carousel-control-next" href="#carouselId1" role="button" data-slide="next">
+                    <span class="carousel-control-next-icon" aria-hidden="true">   <i class="fa fa-caret-right"> </i></span>
+                    <span class="sr-only">Next</span>
+                </a>
+            </div>
+        }
+        else if (ViewBag.fc > 0 && ViewBag.fc <= 4)
+        {
+
+            <div class="media mb-headings align-items-center ">
+                <div class="media-body">
+                    <h1 class="h2">Featured Courses</h1>
+                </div>
+            </div>
+            <div id="carouselId1" class="carousel r slide" data-type="carousel">
+                <!--
+                <ol class="carousel-indicators">
+                    <li data-target="#carouselId" data-slide="prev"></li>
+                    <li data-target="#carouselId" data-slide="next"></li>
+
+                </ol>
+                -->
+                <div class="carousel-inner row w-100 " role="listbox">
+                    @{
+
+
+                        foreach (var item in Model)
+                        {
+                            string que = helpper.Encrypt("" + item.CourseId, true);
+                            que = que.Replace('%', 'a');
+                            que = que.Replace('+', '!');
+                            <div class="carousel-item col-6  col-md-4 col-lg-3 active">
+                                <a href="@Url.Action("Course", "Home", new { id = que.Replace('/', '$') })">
+                                    <div class="card card-sm">
+                                        <div class="position-relative">
+                                            <div class="card-img-top">
+                                                <img src="~/assets/images/@item.Image"
+                                                     class="card-img-top">
+                                            </div>
+
+                                        </div>
+                                        <div class="card-body d-flex">
+                                            <div class="flex">
+
+
+                                                <h5 class="card-title m-0" style="text-align:center; font-size:13px;">@item.CourseName</h5>
+                                                <h5 class="card-title m-0">
+                                                    <small class="text-muted">
+                                                        Level:   @{
+                                                            if (item.Levels == "Easy")
+                                                            {
+                                                                <span class="badge badge-primary ">@item.Levels</span>
+                                                            }
+                                                            else if (item.Levels == "Medium")
+                                                            {
+                                                                <span class="badge badge-warning ">@item.Levels</span>
+                                                            }
+                                                            else if (item.Levels == "Hard")
+                                                            {
+                                                                <span class="badge badge-danger ">@item.Levels</span>
+                                                            }
+                                                        }
+                                                    </small>
+                                                </h5>
+                                                <h5 class="card-title m-0"> <small class="text-muted">Year:   @item.Year </small> </h5>
+                                                @{var totalvideo = 0;
+                                                    foreach (var item1 in item.Sections)
+                                                    {
+
+                                                        foreach (var item2 in item1.SectionMedia)
+                                                        {
+                                                            totalvideo = totalvideo + item2.VideoDuration;
+
+                                                        }
+
+                                                    } }
+                                                <h5 class="card-title m-0"> <small class="text-muted">Duration: @{Html.RenderAction("FormatTime", "Home", new { time = totalvideo });}  </small> </h5>
+
+                                            </div>
+
+                                        </div>
+                                    </div>
+                                </a>
+                            </div>
+
+
+
+
+                        }
+
+                    }
+                </div>
+
+            </div>
+        }
+        else
+        {
+
+        }
+    }
+
+
+</div>
+
+@*@using Microsoft.AspNet.Identity
+    @{
+        ViewBag.Title = "StudentDashboard";
+
+    }
+
+
+    <div class="container-fluid page__container mt-5">
+
+
+        <div>
+            @Html.Action("ResumeCourse", "Home", new { UserId = User.Identity.GetUserId() })
+        </div>
+
+        <hr />
+        <div>
+
+            @Html.Action("FeaturedCourse", "Home", new { UserId = User.Identity.GetUserId() })
+        </div>
+
+
+    </div>*@
+

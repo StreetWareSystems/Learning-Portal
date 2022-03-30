@@ -1,0 +1,35 @@
+﻿<div class="card">
+    <div class="card-body">
+
+        <div class="form-group">
+            <label class="form-label"
+                   for="title">Title</label>
+            <div class="input-group">
+                <input type="text"
+                       class="form-control"
+                       id="CourseTitle"
+                       placeholder="Add Course Name"
+                       value="">
+         
+              
+            </div>
+        </div>
+
+        <div class="form-group mb-0">
+            <div class="form-group">
+                <label for="form-label">Description</label>
+
+                @*<textarea class="form-control" id="CourseDescription" rows="3" placeholder="Write a title" required style="resize:none"></textarea>*@
+
+                <div style="height: 150px;"
+                     class="TAD"
+                     data-toggle="quill"
+                     data-quill-placeholder="Enter Your Description"
+                     data-quill-modules-toolbar='[["bold", "italic"], ["link", "blockquote", "code", "image"], [{"list": "ordered"}, {"list": "bullet"}]]'>
+                    <textarea id="CourseDescription" name="w3review" rows="4" cols="50" style="resize:none"></textarea>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

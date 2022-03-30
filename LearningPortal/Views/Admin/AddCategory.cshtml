@@ -1,0 +1,26 @@
+﻿
+@{
+    ViewBag.Title = "AddCategory";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+
+
+<div class="mdk-drawer-layout__content">
+
+    <div class="card-body">
+       
+            
+                <h2>Categories</h2>
+                @Html.Action("CategoryList", "Admin")
+           
+
+    </div>
+
+
+    <div class="clearfix"></div>
+
+
+</div>
+
+

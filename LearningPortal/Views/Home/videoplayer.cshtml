@@ -1,0 +1,118 @@
+﻿
+
+<link href="https://videojs.github.io/font/css/videojs-icons.css" rel="stylesheet" />
+<link href="https://vjs.zencdn.net/5.16/video-js.min.css" rel="stylesheet" />
+
+<link rel="stylesheet" href="~/assets/css/videojs.css">
+
+<h4 class="fonts">@ViewBag.Secname / @ViewBag.videotitle</h4>
+@{
+    var len = ViewBag.playlist.Count;
+    if (len == 0)
+    {
+        <style>
+            #vemvo-player {
+                display: none;
+            }
+        </style>
+
+        @*<video id="vemvo-player" class="video-js vjs-default-skin vjs-fluid" controls width="640px" height="360px" data-setup='{ "techOrder": ["html5","Youtube"] }'>
+            </video>*@
+    }
+    else
+    {
+        string src = "", type = ViewBag.videotype;
+        int start = ViewBag.StartTime;
+
+        var playlist = ViewBag.playlist;
+        //var len = ViewBag.playlist.Count;
+        int index = ViewBag.index;
+        int mediaid = playlist[index];
+        int d = Convert.ToInt32(ViewBag.duration);
+
+
+        int nextid = 0;
+        int previd = 0;
+        if ((index + 1) > len)
+        {
+
+            <style>
+                .vjs-icon-next-item {
+                    pointer-events: none !important;
+                    color: gray !important;
+                }
+            </style>
+        }
+        else
+        {
+            if (index == (len - 1))
+            {
+                <style>
+                    .vjs-icon-next-item {
+                        pointer-events: none !important;
+                        color: gray !important;
+                    }
+                </style>
+            }
+            else
+            {
+                nextid = playlist[index + 1]; ;
+            }
+        }
+
+        if ((index - 1) == -1)
+        {
+
+            <style>
+                .vjs-icon-previous-item {
+                    pointer-events: none !important;
+                    color: gray !important;
+                }
+            </style>
+        }
+        else
+        {
+            previd = playlist[index - 1];
+        }
+
+
+        if (ViewBag.videotype == "video/youtube")
+
+        {
+            src = ViewBag.videourl + "?start=" + ViewBag.StartTime + "&&modestbranding=1&&enablejsapi=1";
+
+        }
+        else
+        {
+            src = ViewBag.videourl;
+
+        }
+
+        <video id="vemvo-player" class="video-js vjs-default-skin vjs-fluid" controls width="640px" height="360px" data-setup='{ "techOrder": ["html5","Youtube"] }'>
+            <source src="~/assets/videos/@src"
+                    type="@type">
+        </video>
+
+
+        var nextmediaid = nextid;
+        var prevmediaid = previd;
+
+     
+        @Html.Hidden("dr", d)
+        @Html.Hidden("type", type.ToString())
+        @Html.Hidden("mediaid", mediaid)
+        @Html.Hidden("start", start)
+        @Html.Hidden("nextmediaid", nextmediaid)
+        @Html.Hidden("prevmediaid", prevmediaid)
+        @Html.Hidden("ct");
+    }
+
+
+
+
+}
+
+
+
+<script src="~/assets/js/data1.js"></script>
+

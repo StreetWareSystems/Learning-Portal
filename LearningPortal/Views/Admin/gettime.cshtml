@@ -1,0 +1,68 @@
+﻿@{
+    Layout = null;
+}
+
+
+
+<label id="@ViewBag.urlvi1"></label>
+
+<div id="check" style="display:none;">
+    <input hidden type="text" value="@ViewBag.urlvi1" id="vvv" />
+
+    <video controls onloadedmetadata="function_name()" id="videoid">
+        <source src="@ViewBag.urlvi" type="@ViewBag.ext">
+
+
+    </video>
+
+
+   
+    <script src="~/assets/vendor/jquery.min.js"></script>
+    <script>
+        
+
+
+        function function_name() {
+           
+            /**/
+            setTimeout(function () {
+                //your code to be executed after 1 second
+                var video_duration = document.getElementById('videoid').duration;
+
+                
+                var a = $("#vvv").val();
+
+               
+                document.getElementById('check').remove();
+                $("#" + a).text(formatTime_hourformat((video_duration)));
+            }, 2000);
+
+        /**/
+    }
+
+        function formatTime_hourformat(time)
+ {
+
+
+
+            var hour = Math.floor(time / 3600), minutes = time - hour * 3600;
+            hour = hour < 10 ? '0' + hour : hour;
+           
+            minutes = Math.floor(minutes / 60),seconds = Math.floor(time - minutes * 60 - hour * 3600);
+            minutes = minutes < 10 ? '0' + minutes : minutes;
+           
+
+            seconds = seconds < 10 ? '0' + seconds : seconds;
+           
+                return hour + "hr:" + minutes +"min:" + seconds+"sec";
+            
+        }
+    </script>
+
+</div>
+
+
+
+
+
+

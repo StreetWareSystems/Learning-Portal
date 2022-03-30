@@ -1,0 +1,176 @@
+﻿@{
+    ViewBag.Title = "Confirm Email";
+}
+
+<h2>@ViewBag.Title.</h2>
+<div>
+    <p>
+        Thank you for confirming your email. Please @Html.ActionLink("Click here to Log in", "Login", "Account", routeValues: null, htmlAttributes: new { id = "loginLink" })
+    </p>
+</div>
+
+@*TEMPLET VERSION OF SIGNUP PAGE*@
+<!--@model LearningPortal.Models.RegisterViewModel
+@{
+    ViewBag.Title = "Register";
+    Layout = null;
+}
+
+<!DOCTYPE html>
+<html lang="en"
+      dir="ltr">
+
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible"
+          content="IE=edge">
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>Register</title>-->
+<!-- Font Awesome Icons -->
+<!--<link type="text/css"
+      href="~/assets/css/fontawesome.css"
+      rel="stylesheet">-->
+<!-- App CSS -->
+<!--<link type="text/css"
+          href="~/assets/css/app.css"
+          rel="stylesheet">
+
+</head>
+
+
+<body>
+
+    @if(Request.IsAuthenticated){
+        <script type="text/javascript">
+            window.location.href = "/Home/StudentDashboard";
+        </script>
+    }
+    <div class="d-flex align-items-center"
+         style="min-height: 100vh">
+        <div class="col-sm-8 col-md-6 col-lg-4 mx-auto"
+             style="min-width: 300px;">
+            <div class="text-center mt-5 mb-1">
+                <div class="avatar avatar-lg">
+                    <img src="~/assets/images/logo/primary.svg"
+                         class="avatar-img rounded-circle"
+                         alt="LearnPlus" />
+                </div>
+            </div>
+            <div class="d-flex justify-content-center mb-5 navbar-light">
+                <a href="student-dashboard.html"
+                   class="navbar-brand m-0">LearnPlus</a>
+            </div>
+            <div class="card navbar-shadow">
+                <div class="card-header text-center">
+                    <h4 class="card-title">Sign Up</h4>
+                    <p class="card-subtitle">Create a new account</p>
+                </div>
+
+                <div class="card-body">
+
+                    @using (Html.BeginForm("Register", "Account", FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
+                    {
+                        @Html.AntiForgeryToken()
+
+
+                        @Html.ValidationSummary("", new { @class = "text-danger" })
+                        <div class="form-group">
+
+                            @Html.LabelFor(m => m.UserName, new { @class = "col-md-2 control-label" })
+
+                            <div class="input-group input-group-merge">
+                                @Html.TextBox("name", null,new { @class = "form-control form-control-prepended", placeholder = "Your User Name" })
+                                <div class="input-group-prepend">
+                                    <div class="input-group-text">
+                                        <span class="far fa-user"></span>
+                                    </div>
+                                </div>
+
+                                @Html.Hidden("UserName")
+                            </div>
+                        </div>
+                        <div class="form-group">
+
+                            @Html.LabelFor(m => m.Email, new { @class = "col-md-2 control-label" })
+
+                            <div class="input-group input-group-merge">
+                                @Html.TextBoxFor(m => m.Email, new { @class = "form-control form-control-prepended", placeholder = "Your Email Address" })
+                                <div class="input-group-prepend">
+                                    <div class="input-group-text">
+                                        <span class="far fa-user"></span>
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            @Html.LabelFor(m => m.Password, new { @class = "col-md-8 control-label" })
+
+                            <div class="input-group input-group-merge">
+                                @Html.PasswordFor(m => m.Password, new { @class = "form-control form-control-prepended", placeholder = "Your Password" })
+                                <div class="input-group-prepend">
+                                    <div class="input-group-text">
+                                        <span class="far fa-user"></span>
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            @Html.LabelFor(m => m.ConfirmPassword, new { @class = "col-md-8 control-label" })
+
+                            <div class="input-group input-group-merge">
+                                @Html.PasswordFor(m => m.ConfirmPassword, new { @class = "form-control form-control-prepended", placeholder = "ConfirmPassword" })
+                                <div class="input-group-prepend">
+                                    <div class="input-group-text">
+                                        <span class="far fa-user"></span>
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+
+                        <div class="form-group ">
+                            <button type="submit"
+                                    class="btn btn-primary btn-block" id="btnRemove">
+                                Register
+                            </button>
+                        </div>
+                        <div class="card-footer text-center text-black-50">
+                            Already registered?
+
+                            @Html.ActionLink("Login", "Login", "Account", routeValues: null, htmlAttributes: new { id = "registerLink" })
+                        </div>
+                    }
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="~/assets/vendor/jquery.min.js"></script>-->
+<!-- Bootstrap -->
+<!--<script src="~/assets/vendor/popper.min.js"></script>
+    <script src="~/assets/vendor/bootstrap.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+
+    <script>
+
+        $(document).ready(function () {
+
+            $('#btnRemove').click(function () {
+                var a = document.getElementById("name").value;
+
+                document.getElementById("UserName").value = a;
+                document.getElementById("name").value = "";
+
+
+
+
+            });
+        });
+
+    </script>
+
+</body>
+</html>-->

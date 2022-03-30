@@ -1,0 +1,711 @@
+
+
+* {
+    margin: 0;
+    padding: 0;
+    text-decoration: none
+}
+
+body {
+    background: #555;
+}
+
+header {
+    position: relative;
+    width: 100%;
+    background: #337ab7;
+}
+
+.logo {
+    position: relative;
+    z-index: 123;
+    padding: 10px;
+    font: 18px verdana;
+    color: #6DDB07;
+    float: left;
+    width: 15%
+}
+
+    .logo a {
+        color: #6DDB07;
+    }
+
+#cssmenu, #cssmenu ul, #cssmenu ul li, #cssmenu ul li a, #cssmenu #head-mobile {
+    border: 0;
+    list-style: none;
+    line-height: 1;
+    display: block;
+    position: relative;
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+}
+
+
+    #cssmenu ul {
+    }
+
+        #cssmenu ul ul {
+            border: 1px solid;
+        }
+
+    #cssmenu li {
+        border: 1px solid;
+        list-style: none;
+        line-height: 1;
+        display: block;
+        position: relative;
+        -webkit-box-sizing: border-box;
+        -moz-box-sizing: border-box;
+    }
+
+
+    #cssmenu:after, #cssmenu > ul:after {
+        content: ".";
+        display: block;
+        clear: both;
+        visibility: hidden;
+        line-height: 0;
+        height: 0
+    }
+
+    #cssmenu #head-mobile {
+        display: none
+    }
+
+#cssmenu {
+    font-family: sans-serif;
+    z-index: 3;
+}
+
+    #cssmenu > ul > li {
+        float: left;
+        margin-top: 1px;
+    }
+
+        #cssmenu > ul > li > a {
+            color: #8a9299;
+            font-family: Roboto,Helvetica Neue,Arial,sans-serif,Apple Color Emoji,Segoe UI Emoji,Segoe UI Symbol;
+            font-size: 16px !important;
+            font-weight: 400;
+            line-height: 24px;
+        }
+
+    #cssmenu .fa-caret-right {
+        float: right;
+    }
+
+    #cssmenu > ul > li > a:hover {
+        color: black;
+    }
+
+    #cssmenu > ul > li:hover > a, #cssmenu ul li.active a {
+        color: #cfdbe6
+    }
+
+    #cssmenu > ul > li:hover, #cssmenu ul li.active:hover, #cssmenu ul li.active, #cssmenu ul li.has-sub.active:hover {
+        -webkit-transition: background .3s ease;
+        -ms-transition: background .3s ease;
+        transition: background .3s ease;
+    }
+
+    #cssmenu > ul > li.has-sub > a {
+        padding-right: 30px
+    }
+
+        #cssmenu > ul > li.has-sub > a:after {
+            position: absolute;
+            top: 22px;
+            right: 11px;
+            width: 8px;
+            height: 2px;
+            display: block;
+            background: #ddd;
+            content: ''
+        }
+
+        #cssmenu > ul > li.has-sub > a:before {
+            position: absolute;
+            top: 19px;
+            right: 14px;
+            display: block;
+            width: 2px;
+            height: 8px;
+            background: #ddd;
+            content: '';
+            -webkit-transition: all .25s ease;
+            -ms-transition: all .25s ease;
+            transition: all .25s ease
+        }
+
+    #cssmenu > ul > li.has-sub:hover > a:before {
+        top: 23px;
+        height: 0
+    }
+
+    #cssmenu ul ul {
+        position: absolute;
+        left: -9999px
+    }
+
+        #cssmenu ul ul li {
+            height: 0;
+            -webkit-transition: all .25s ease;
+            -ms-transition: all .25s ease;
+            background: #fff;
+            transition: all .25s ease
+        }
+
+            #cssmenu ul ul li:hover {
+                background: #8a9299;
+            }
+
+    #cssmenu li:hover > ul {
+        left: auto
+    }
+
+        #cssmenu li:hover > ul > li {
+            height: 35px
+        }
+
+    #cssmenu ul ul ul {
+        margin-left: 100%;
+        top: 0
+    }
+
+    #cssmenu ul ul li a {
+        border-bottom: 1px solid rgba(150,150,150,0.15);
+        padding: 11px 15px;
+        width: 170px;
+        font-size: 12px;
+        text-decoration: none;
+        color: #333;
+        font-weight: 400;
+    }
+
+    #cssmenu ul ul li:last-child > a, #cssmenu ul ul li.last-item > a {
+        border-bottom: 0
+    }
+
+    #cssmenu ul ul li:hover > a, #cssmenu ul ul li a:hover {
+        color: #fff
+    }
+
+    #cssmenu ul ul li.has-sub > a:after {
+        position: absolute;
+        top: 16px;
+        right: 11px;
+        width: 8px;
+        height: 2px;
+        display: block;
+        background: #ddd;
+        content: ''
+    }
+
+    #cssmenu ul ul li.has-sub > a:before {
+        position: absolute;
+        top: 13px;
+        right: 14px;
+        display: block;
+        width: 2px;
+        height: 8px;
+        background: #ddd;
+        content: '';
+        -webkit-transition: all .25s ease;
+        -ms-transition: all .25s ease;
+        transition: all .25s ease
+    }
+
+    #cssmenu ul ul > li.has-sub:hover > a:before {
+        top: 17px;
+        height: 0
+    }
+
+    #cssmenu ul ul li.has-sub:hover, #cssmenu ul li.has-sub ul li.has-sub ul li:hover {
+        background: #363636;
+    }
+
+    #cssmenu ul ul ul li.active a {
+        border-left: 1px solid #333
+    }
+
+    #cssmenu > ul > li.has-sub > ul > li.active > a, #cssmenu > ul ul > li.has-sub > ul > li.active > a {
+        border-top: 1px solid #333
+    }
+
+@media screen and (max-width:300px ) {
+    .logo {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 46px;
+        text-align: center;
+        padding: 10px 0 0 0;
+        float: none
+    }
+
+    .logo2 {
+        display: none
+    }
+
+    nav {
+        width: 100%;
+    }
+
+    #cssmenu {
+        width: 100%;
+        font-size: 1rem;
+    }
+
+        #cssmenu ul {
+            width: 50%;
+            display: none;
+            margin-top: 1px;
+        }
+
+            #cssmenu ul li {
+                width: 50%;
+                border-top: 1px solid #444
+            }
+
+                #cssmenu ul li:hover {
+                    background: #363636;
+                }
+
+            #cssmenu ul ul li, #cssmenu li:hover > ul > li {
+                height: auto;
+                font-size: 1rem;
+            }
+
+                #cssmenu ul li a, #cssmenu ul ul li a {
+                    width: auto;
+                    border-bottom: 0;
+                    font-size: 1rem;
+                }
+
+        #cssmenu > ul > li {
+            float: none
+        }
+
+        #cssmenu ul ul li a {
+            padding-left: 25px
+        }
+
+        #cssmenu ul ul li {
+            background: #334 !important;
+        }
+
+            #cssmenu ul ul li:hover {
+                background: #363636 !important
+            }
+
+        #cssmenu ul ul ul li a {
+            padding-left: 35px
+        }
+
+        #cssmenu ul ul li a {
+            color: #ddd;
+            background: none
+        }
+
+        #cssmenu ul ul li:hover > a, #cssmenu ul ul li.active > a {
+            color: #fff
+        }
+
+        #cssmenu ul ul, #cssmenu ul ul ul {
+            position: relative;
+            left: 0;
+            width: 50%;
+            margin: 0;
+            text-align: left
+        }
+
+            #cssmenu > ul > li.has-sub > a:after, #cssmenu > ul > li.has-sub > a:before, #cssmenu ul ul > li.has-sub > a:after, #cssmenu ul ul > li.has-sub > a:before {
+                display: none
+            }
+
+        #cssmenu #head-mobile {
+            display: block;
+            padding: 23px;
+            color: #ddd;
+            font-size: 1rem;
+            font-weight: 700
+        }
+
+    .button {
+        width: 55px;
+        height: 46px;
+        position: absolute;
+        right: 0;
+        top: 0;
+        cursor: pointer;
+        z-index: 12399994;
+    }
+
+        .button:after {
+            position: absolute;
+            top: 22px;
+            right: 20px;
+            display: block;
+            height: 4px;
+            width: 20px;
+            border-top: 2px solid #dddddd;
+            border-bottom: 2px solid #dddddd;
+            content: ''
+        }
+
+        .button:before {
+            -webkit-transition: all .3s ease;
+            -ms-transition: all .3s ease;
+            transition: all .3s ease;
+            position: absolute;
+            top: 16px;
+            right: 20px;
+            display: block;
+            height: 2px;
+            width: 20px;
+            background: #ddd;
+            content: ''
+        }
+
+        .button.menu-opened:after {
+            -webkit-transition: all .3s ease;
+            -ms-transition: all .3s ease;
+            transition: all .3s ease;
+            top: 23px;
+            border: 0;
+            height: 2px;
+            width: 19px;
+            background: #fff;
+            -webkit-transform: rotate(45deg);
+            -moz-transform: rotate(45deg);
+            -ms-transform: rotate(45deg);
+            -o-transform: rotate(45deg);
+            transform: rotate(45deg)
+        }
+
+        .button.menu-opened:before {
+            top: 23px;
+            background: #fff;
+            width: 19px;
+            -webkit-transform: rotate(-45deg);
+            -moz-transform: rotate(-45deg);
+            -ms-transform: rotate(-45deg);
+            -o-transform: rotate(-45deg);
+            transform: rotate(-45deg)
+        }
+
+    #cssmenu .submenu-button {
+        position: absolute;
+        z-index: 99;
+        right: 0;
+        top: 0;
+        display: block;
+        border-left: 1px solid #444;
+        height: 46px;
+        width: 46px;
+        cursor: pointer
+    }
+
+        #cssmenu .submenu-button.submenu-opened {
+            background: #262626
+        }
+
+    #cssmenu ul ul .submenu-button {
+        height: 34px;
+        width: 34px
+    }
+
+    #cssmenu .submenu-button:after {
+        position: absolute;
+        top: 22px;
+        right: 19px;
+        width: 8px;
+        height: 2px;
+        display: block;
+        background: #ddd;
+        content: ''
+    }
+
+    #cssmenu ul ul .submenu-button:after {
+        top: 15px;
+        right: 13px
+    }
+
+    #cssmenu .submenu-button.submenu-opened:after {
+        background: #fff
+    }
+
+    #cssmenu .submenu-button:before {
+        position: absolute;
+        top: 19px;
+        right: 22px;
+        display: block;
+        width: 2px;
+        height: 8px;
+        background: #ddd;
+        content: ''
+    }
+
+    #cssmenu ul ul .submenu-button:before {
+        top: 12px;
+        right: 16px
+    }
+
+    #cssmenu .submenu-button.submenu-opened:before {
+        display: none
+    }
+
+    #cssmenu ul ul ul li.active a {
+        border-left: none
+    }
+
+    #cssmenu > ul > li.has-sub > ul > li.active > a, #cssmenu > ul ul > li.has-sub > ul > li.active > a {
+        border-top: none
+    }
+}
+
+
+/*@media only screen and (min-width: 320px) and (max-width: 768px) {
+
+
+
+
+
+    #cssmenu {
+        width: 100%;
+        visibility: visible;
+    }
+
+        #cssmenu ul {
+            width: 100%;
+            display: none;
+            margin-top: 1px;
+        }
+}*/
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+#hero {
+    width: 100%;
+    height: 100vh;
+    overflow: hidden;
+    position: relative;
+    z-index: 0;
+}
+
+    #hero .carousel, #hero .carousel-inner, #hero .carousel-item, #hero .carousel-item::before {
+        position: absolute;
+        top: 0;
+        right: 0;
+        left: 0;
+        bottom: 0;
+    }
+
+    #hero .carousel-item {
+        background-size: cover;
+        background-repeat: no-repeat;
+    }
+
+        #hero .carousel-item::before {
+            content: '';
+            /*background-color: rgba(4, 12, 21, 0.5);*/
+        }
+
+    #hero .carousel-container {
+        display: flex;
+        align-items: center;
+        position: absolute;
+        bottom: 0;
+        top: 20px;
+        left: 50px;
+        right: 50px;
+    }
+
+    #hero h2 {
+        color: #fff;
+        margin: 0;
+        font-size: 48px;
+        font-weight: 700;
+    }
+
+    #hero p {
+        -webkit-animation-delay: 0.4s;
+        animation-delay: 0.4s;
+        color: #363636;
+        margin-top: 10px;
+        text-transform: initial;
+    }
+
+@media (min-width: 1200px) {
+    #hero p {
+        width: 50%;
+    }
+}
+
+#hero .carousel-inner .carousel-item {
+    transition-property: opacity;
+    background-position: center;
+}
+
+#hero .carousel-inner .carousel-item,
+#hero .carousel-inner .active.carousel-item-left,
+#hero .carousel-inner .active.carousel-item-right {
+    opacity: 0;
+}
+
+#hero .carousel-inner .active,
+#hero .carousel-inner .carousel-item-next.carousel-item-left,
+#hero .carousel-inner .carousel-item-prev.carousel-item-right {
+    opacity: 1;
+    transition: 0.5s;
+}
+
+    #hero .carousel-inner .carousel-item-next,
+    #hero .carousel-inner .carousel-item-prev,
+    #hero .carousel-inner .active.carousel-item-left,
+    #hero .carousel-inner .active.carousel-item-right {
+        left: 0;
+        transform: translate3d(0, 0, 0);
+    }
+
+#hero .carousel-control-prev, #hero .carousel-control-next {
+    width: 10%;
+    top: 112px;
+    margin-top: 10px
+}
+
+@media (max-width: 992px) {
+    #hero .carousel-control-prev, #hero .carousel-control-next {
+        top: 66px;
+    }
+}
+
+#hero .carousel-control-next-icon, #hero .carousel-control-prev-icon {
+    background: none;
+    font-size: 50px;
+    line-height: 1;
+    width: auto;
+    height: auto;
+    background: rgba(255, 255, 255, 0.2);
+    padding: 10px;
+    transition: 0.3s;
+    color: rgb(18 56 245);
+    margin-top: 25rem;
+}
+
+    #hero .carousel-control-next-icon:hover, #hero .carousel-control-prev-icon:hover {
+        background: rgba(255, 255, 255, 0.3);
+        color: rgba(255, 255, 255, 0.8);
+    }
+
+#hero .carousel-indicators li {
+    cursor: pointer;
+    background: #fff;
+    overflow: hidden;
+    border: 0;
+    width: 12px;
+    height: 12px;
+    opacity: .6;
+    transition: 0.3s;
+}
+
+    #hero .carousel-indicators li.active {
+        opacity: 1;
+        background: #ed502e;
+    }
+
+#hero .btn-get-started {
+    font-family: "Raleway", sans-serif;
+    font-weight: 500;
+    font-size: 14px;
+    letter-spacing: 1px;
+    display: inline-block;
+    padding: 14px 32px;
+    border-radius: 4px;
+    transition: 0.5s;
+    line-height: 1;
+    color: #fff;
+    -webkit-animation-delay: 0.8s;
+    animation-delay: 0.8s;
+    background: #8c3927;
+    margin-top: 15px;
+}
+
+#hero .data {
+    font-size: 35px;
+}
+
+#hero .btn-get-started:hover {
+    background: #bb2e0f;
+    text-decoration: none;
+}
+
+@media (max-width: 992px) {
+    #hero {
+        height: 100vh;
+    }
+
+        #hero .carousel-container {
+            text-align: center;
+            top: 74px;
+        }
+}
+
+@media (max-width: 768px) {
+    #hero h2 {
+        font-size: 30px;
+    }
+}
+
+@media (min-width: 1024px) {
+    #hero .carousel-control-prev, #hero .carousel-control-next {
+        width: 5%;
+    }
+}
+
+@media (max-height: 500px) {
+    #hero {
+        height: 120vh;
+    }
+}
+
+.dropdown-submenu {
+    position: relative;
+}
+
+    .dropdown-submenu a::after {
+        transform: rotate(-90deg);
+        position: absolute;
+        right: 6px;
+        top: .8em;
+    }
+
+    .dropdown-submenu .dropdown-menu {
+        top: 0;
+        left: 100%;
+        margin-left: .1rem;
+        margin-right: .1rem;
+    }
+

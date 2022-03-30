@@ -1,0 +1,4 @@
+ <iframe id="player" class="embed-responsive-item"
+                                @{ string a = "https://www.youtube-nocookie.com/embed/" + Html.DisplayFor(model => model.VideoUrl) + "?&&modestbranding=1&&rel=0&&enablejsapi=1"; }
+                                src="@a"
+                                allowfullscreen=""></iframe>

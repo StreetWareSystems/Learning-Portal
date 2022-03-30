@@ -1,0 +1,38 @@
+﻿@model IEnumerable<LearningPortal.Models.Courses>
+
+@{
+    ViewBag.Title = "AddCourse";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+@*<input type="hidden" id="catId" value="@ViewBag.CategoryId" />
+<input type="hidden" id="SubcatId" value="@ViewBag.SubCategoryId" />*@
+
+
+<div class="mdk-drawer-layout__content " id="simple">
+
+
+
+
+    <div class="card-body">
+        @if (ViewBag.CategoryId != null && ViewBag.SubCategoryId != null)
+        {
+
+            @Html.Action("CourseFilter", "Admin", new { catid = ViewBag.CategoryId, subcatid = ViewBag.SubCategoryId })
+        }
+        else
+        {
+            @Html.Action("CourseFilter", "Admin")
+        }
+
+
+
+
+
+    </div>
+
+
+    <div class="clearfix"></div>
+
+
+</div>
+

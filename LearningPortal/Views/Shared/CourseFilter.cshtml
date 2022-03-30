@@ -1,0 +1,122 @@
+﻿@model LearningPortal.Models.CascadingClass
+
+
+<input type="hidden" id="catId" value="@ViewBag.CategoryId" />
+<input type="hidden" id="SubcatId" value="@ViewBag.SubCategoryId" />
+
+<div class="d-sm-flex align-items-center">
+    
+   
+
+    <a class="btn btn-secondary h-25 ml-2 ml-sm-0 mb-2 mb-sm-0" style="width:145px" href="@Url.Action("CourseEdit", "Admin")">Add Course</a>
+    <div class="container p-0 d-flex">
+
+
+        <ul class="d-flex justify-content-center align-items-center w-100 list list-unstyled my-0 ml-2 flex-wrap flex-md-row flex-column px-2" style="border:1px solid grey">
+            <li><h5 style="margin-right: 5px; margin-top: 12px;">Filter by:</h5></li>
+            <li class="media-body mx-1 d-flex justify-content-center align-items-center py-1 bg-white border" style="max-width:135px">
+                <div class="h-100">
+                    <input type="checkbox" class="mr-1" id="CheckFt">
+                    <label class="m-0" for="CheckFt">Featured</label>
+                </div>
+            </li>
+            <li>
+
+                @if (ViewBag.CateogryList != null)
+                {
+
+                    @Html.DropDownListFor(m => m.CategoryId, ViewBag.CateogryList as SelectList, "Category", new { @class = "form-control1", style = "max-width: 170px;" })
+
+                }
+            </li>
+            <li style="min-width:200px;">
+
+                @Html.DropDownListFor(m => m.SubCategoryId, new SelectList(" "), "SubCategory", new { @class = "form-control1 w-100" })
+
+            </li>
+            <li>
+                <form class="search-form d-flex" style="margin-left: 15px;">
+                    <input type="text"
+                           class="form-control"
+                           id="searchText"
+                           placeholder="Search">
+
+                    <i class="material-icons font-size-24pt">search</i>
+
+                </form>
+            </li>
+            <li class="media-right mt-2 mt-xs-plus-0">
+                <a class="btn btn-success " style="border-radius: 25px;" id="check"> <i class="material-icons font-weight-bolder">check</i></a>
+            </li>
+
+        </ul>
+    </div>
+
+
+
+
+</div>
+
+<div class="clearfix"></div>
+
+<div class="courseList" id="courBox">
+
+</div>
+
+
+
+<script src="~/assets/vendor/jquery.min.js"></script>
+
+<script>
+
+
+    $(document).ready(function () {
+        var cid = $("#catId").val();
+        var scid = $("#SubcatId").val();
+        var search = $("#searchText").val();
+        var checkft = $("#CheckFt").is(":checked");
+       
+        if (cid) {
+            $("#CategoryId").val(cid);
+            $.get("/Admin/GetSubCategoriesList", { CategoryId: cid }, function (data) {
+                $("#SubCategoryId").empty();
+                $("#SubCategoryId").append("<option value=''>SubCategory</option>");
+                $.each(data, function (index, row) {
+                    $("#SubCategoryId").append("<option value='" + row.SubCategoryId + "'>" + row.SubCategoryName + "</option>");
+                    $("#SubCategoryId").val(scid);
+                    $(".courseList").load("/Admin/CourseList", { catid: cid, subcatid:scid, tag: search, check: checkft });
+                });
+            });
+            
+
+        }
+        else {
+            $("#SubCategoryId").empty();
+            $("#SubCategoryId").append("<option value=''>SubCategory</option>");
+
+        }
+
+
+
+        $("#CategoryId").change(function () {
+            var categoryId = $(this).val();
+            if (categoryId != "") {
+
+                $.get("/Admin/GetSubCategoriesList", { CategoryId: categoryId }, function (data) {
+                    $("#SubCategoryId").empty();
+                    $("#SubCategoryId").append("<option value=''>SubCategory</option>");
+                    $.each(data, function (index, row) {
+                        $("#SubCategoryId").append("<option value='" + row.SubCategoryId + "'>" + row.SubCategoryName + "</option>");
+                    });
+                });
+            }
+            else {
+                $("#SubCategoryId").empty();
+                $("#SubCategoryId").append("<option value=''>SubCategory</option>");
+
+            }
+
+        })
+        
+    });
+</script>

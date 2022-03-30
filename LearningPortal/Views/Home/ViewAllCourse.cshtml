@@ -1,0 +1,118 @@
+﻿
+@{
+    ViewBag.Title = "ViewAllCourse";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    <title> @ViewBag.BreadCrumbSubCat</title>
+}
+
+
+@model IEnumerable<LearningPortal.Models.Courses>
+
+
+
+<div class="mdk-drawer-layout__content page mt-5">
+
+    @{ if (ViewBag.id != 0)
+        {
+            string que3 = helpper.Encrypt("" + ViewBag.BreadCrumbCatID, true);
+
+            que3 = que3.Replace('%', 'a');
+          
+            que3 = que3.Replace('+', '!');
+            <ol class="breadcrumb">
+
+                <li class="breadcrumb-item"><a href="@Url.Action("ViewAllSubCategory", "Home", new { id =que3.Replace('/', '$') })">@ViewBag.BreadCrumbCat</a> </li>
+                <li class="breadcrumb-item "><a href="#"> @ViewBag.BreadCrumbSubCat</a></li>
+                <li class="breadcrumb-item active">ViewAll</li>
+            </ol>
+
+
+            <div class="media align-items-center mb-headings">
+                <div class="media-body">
+                    <h1 class="h2">Courses</h1>
+                </div>
+            </div>
+        }
+        else
+        {
+            string que3 = helpper.Encrypt("" + ViewBag.BreadCrumbCatID, true);
+
+            que3 = que3.Replace('%', 'a');
+      
+            que3 = que3.Replace('+', '!');
+            <ol class="breadcrumb">
+
+                <li class="breadcrumb-item"><a href="@Url.Action("ViewAllSubCategory", "Home", new { id =que3.Replace('/', '$') })">@ViewBag.BreadCrumbCat</a> </li>
+                <li class="breadcrumb-item "><a href="#"> @ViewBag.BreadCrumbSubCat</a></li>
+
+            </ol>
+
+            <div class="media align-items-center mb-headings">
+                <div class="media-body">
+                    <h1 class="h2">No Courses Available</h1>
+                </div>
+            </div>
+        }
+    }
+
+
+    <div class="clearfix"></div>
+
+    <div class="card-columns row">
+        @{ foreach (var item in Model)
+            {
+                string que = helpper.Encrypt("" + item.CourseId, true);
+                que = que.Replace('%', 'a');
+              
+                que = que.Replace('+', '!');
+                <div class="carousel-item col-sm-6 col-md-4 col-lg-3 active">
+                    <a href="@Url.Action("Course", "Home", new { id = que.Replace('/', '$') })">
+                        <div class="card card-sm">
+
+                            <div class="position-relative">
+                                <div class="card-img-top">
+                                    <img src="~/assets/images/@item.Image"
+                                         class="card-img-top">
+                                </div>
+
+                            </div>
+                            <div class="card-body d-flex">
+                                <div class="flex">
+
+                                    <h5 class="card-title m-0" style="text-align:center; font-size:13px;">@item.CourseName</h5>
+                                    <h5 class="card-title m-0">
+                                        <small class="text-muted">
+                                            Level: @{
+                                                if (item.Levels == "Easy")
+                                                {
+                                                    <span class="badge badge-primary ">@item.Levels</span>
+                                                }
+                                                else if (item.Levels == "Medium")
+                                                {
+                                                    <span class="badge badge-warning ">@item.Levels</span>
+                                                }
+                                                else if (item.Levels == "Hard")
+                                                {
+                                                    <span class="badge badge-danger ">@item.Levels</span>
+                                                }
+                                            }
+                                        </small>
+                                    </h5>
+                                    <h5 class="card-title m-0"> <small class="text-muted">Year:   @item.Year </small> </h5>
+                                    <p class="card-title limited-text"> @item.Description  </p><br>
+
+                                </div>
+
+                            </div>
+
+                        </div>
+                    </a>
+                </div>
+
+            }
+        }
+    </div>
+
+</div>
+
+

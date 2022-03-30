@@ -1,0 +1,74 @@
+﻿@using Microsoft.AspNet.Identity
+@using LearningPortal.Models
+
+@if (Request.IsAuthenticated)
+{
+    using (Html.BeginForm("LogOff", "Account", FormMethod.Post, new { id = "logoutForm", @class = "navbar-right" }))
+    {
+        @Html.AntiForgeryToken()<ul class="nav navbar-nav navbar-right">
+                                    <li class="nav-item">
+                                        @{
+                                            if (User.IsInRole("Admin"))
+                                            {
+                                                <a href="@Url.Action("AddCourse", "Admin")"
+                                                   class="nav-link">
+                                                    Hello @User.Identity.GetUserName()
+                                                </a>
+
+                                            }
+                                            else
+                                            {
+                                                <a href="@Url.Action("StudentDashboard", "Home")"
+                                                   class="nav-link">
+                                                    Hello @User.Identity.GetUserName()
+                                                </a>
+
+                                            }
+                                        }
+                                    </li>
+            <li class="nav-item dropdown ml-1 ml-md-3">
+                <a class="nav-link dropdown-toggle"
+                   data-toggle="dropdown"
+                   href="#"
+                   role="button">
+                    <img src="~/assets/images/people/50/guy-6.jpg"
+                         alt="Avatar"
+                         class="rounded-circle"
+                         width="40">
+                </a>
+                <div class="dropdown-menu dropdown-menu-right">
+
+
+
+                    @*<a class="dropdown-item"
+                           href="#">
+
+                            <i class="material-icons">edit</i> Edit Account
+
+                        </a>*@
+
+                    <a class="dropdown-item" 
+                       href="javascript:document.getElementById('logoutForm').submit()">
+                        <i class="material-icons">lock</i> Logout
+                    </a>
+                </div>
+            </li>
+            <!-- // END User dropdown -->
+        </ul>
+        @*<li><a href="javascript:document.getElementById('logoutForm').submit()">Log off</a></li>*@
+
+    }
+}
+else
+{
+    <ul class="nav navbar-nav navbar-right">
+        <li>@Html.ActionLink("Register", "Register", "Account", routeValues: null, htmlAttributes: new { id = "registerLink" })</li>
+        <li>@Html.ActionLink("Log in", "Login", "Account", routeValues: null, htmlAttributes: new { id = "loginLink" })</li>
+    </ul>
+}
+
+<script src="~/assets/vendor/jquery.min.js"></script>
+<script src="~/assets/js/app.js"></script>
+
+
+

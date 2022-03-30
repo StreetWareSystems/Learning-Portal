@@ -1,0 +1,236 @@
+﻿
+@if (ViewBag.PData.Count == 0)
+{
+    @Html.Action("CourseUploader", "Admin")
+
+}
+
+
+
+<input type="hidden" id="rootName" value="@ViewBag.Placeholder" />
+<ul class="nestable-list">
+    <li class="nestable-item nestable-item-handle a draggable" data-id="2" id="co">
+
+        @{
+            <input type="hidden" id="rootTitle" value="@ViewBag.Placeholder" />
+            var count = 0;
+            var count2 = 1;
+            foreach (var h in ViewBag.QData)
+            {
+
+                <!--Headings-->
+                <div style="border-top: 1px dotted black; border-bottom: 1px dotted black;">
+                    <span class="display-toggle">
+                        <i class="material-icons" style="background: #39444d;color: white;border-radius: 50%;">arrow_drop_up</i>
+                    </span>
+                    <div class="nestable-content bg-light">
+
+                        <div class="media-body" id="Nested_Card">
+
+                            <div class="media align-items-center">
+                                <div class="media-body" id="Nested_Card">
+                                    @*<a href="#" class="@h">@h</a>*@
+
+                                    <input class="heading" type="text" value="@h" id="@h" style="display:none" />
+                                    <label class="heading" id="heading">@h</label>
+                                </div>
+
+                                <!--Buttons-->
+                                <div class="media-right d-flex">
+
+
+
+                                    <a href="#"
+                                       class="btn btn-white btn-sm" id="btnfileAdd">
+                                        <input type="text" id="dad" style="display:none" class="@h" hidden />
+                                        <i class="material-icons">file_upload</i>
+                                    </a>
+                                    <div class="mca">
+                                        <input type="file" id="imgupload" name="files[]" style="display:none" hidden multiple accept="video/mp4,video/webm" />
+
+                                    </div>
+
+
+                                    <a href="#"
+                                       class="btn btn-white btn-sm EditSubDir" id="AddedSubDirName">
+
+                                        <i class="material-icons">edit</i>
+                                    </a>
+                                    <a href="#" style="display: none; background: #6eb9ff"
+                                       class="btn btn-white btn-sm EditSubDirA" id="AddedSubDirName">
+                                        <i class="material-icons">edit</i>
+                                    </a>
+                                    <a href="#"
+                                       class="btn btn-white btn-sm DelDir">
+                                        <i class="material-icons">delete</i>
+                                    </a>
+                                </div>
+
+                            </div>
+
+                        </div>
+                    </div>
+                    <hr />
+                    <!--SubList-->
+                    @{var sc = h.Replace(" ", string.Empty) + "sws";
+                    <ul class="ascaq list-unstyled @sc" id="@sc">
+                        <li class="draggable">
+                            @foreach (var val in ViewBag.PData[count])
+                            {
+
+
+                                <div class="nestable" id="nestable-handles-primary">
+                                    <ul class="nestable-list">
+                                        <li class="nestable-item nestable-item-handle "
+                                            data-id="2">
+                                            <div class="nestable-handle"><i class="material-icons">menu</i></div>
+                                            <div class="nestable-content" id="@ViewBag.Placeholde">
+                                                <div class="media align-items-center" id="@h">
+
+                                                    <div class="media-body" id="Nested_Card">
+                                                        <div class="card-title h6 mb-0">
+                                                            @{
+
+                                                                string filen = @val;
+                                                                int lastindex = filen.IndexOf('.');
+                                                                var val2 = filen.Substring(0, lastindex);
+                                                                string extension = filen.Substring(lastindex);
+
+                                                                <input class="w-50" type="text" value="@val2" id="@val" style="display:none;" />
+                                                                <label class="w-50" id="title">@val2</label>
+
+
+
+                                                                <div class="ddd vc-time">
+                                                                    @{Html.RenderAction("gettime", "Admin", new { video = @val, section = @h, count1 = count2, extension = extension, check = "edit" }); }
+
+                                                                </div>
+
+                                                                        count2++;
+                                                            }
+
+
+                                                        </div>
+
+
+                                                    </div>
+
+                                                    <div class="media-right %@h">
+                                                        <button href="#"
+                                                                class="btn btn-white btn-sm video" title="@val" data-toggle="modal"
+                                                                data-target="#exampleModal">
+                                                            <i class="material-icons">visibility</i>
+                                                        </button>
+                                                        <button href="#"
+                                                                class="btn btn-white btn-sm EditFile">
+                                                            <i class="material-icons">edit</i>
+                                                        </button>
+                                                        <button href="#" style="display: none; background: #6eb9ff"
+                                                                class="btn btn-white btn-sm EditFileA">
+                                                            <i class="material-icons">edit</i>
+                                                        </button>
+                                                        <button href="#"
+                                                                class="btn btn-white btn-sm DeleteFile">
+                                                            <i class="material-icons ">delete</i>
+                                                        </button>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </li>
+                                    </ul>
+
+                                </div>
+
+                                                                        }
+                        </li>
+                    </ul>
+                                                                            count++;
+                                                                        }
+                    </div>
+                    }
+                    }
+
+                    @{ if (ViewBag.PData.Count > 0)
+                        {
+
+                            <div id="apnd_div">
+
+                                <button class="btn btn-primary" type="submit" id="AddSecBtn"><i class="material-icons">control_point</i>Add Section</button>
+                            </div>
+                        }
+                    }
+            </li>
+</ul>
+
+
+
+
+@*<div class="modal fade" id="exampleModal" style="height:100vh;width:100vw">
+    <div class="modal-dialog vc-modal m-0">
+        <div class="modal-content">
+            <div class="modal-header modal-header-vc">
+
+                <button type="button" class="close ml-2" data-dismiss="modal" id="close">&times;</button>
+            </div>
+
+            <div class="modal-body">
+                <video id="vemvo-player" controls width="100%" height="100%" src="~/assets/">
+                </video>
+            </div>
+        </div>
+    </div>
+</div>*@
+
+
+<script>
+    $(document).ready(function () {
+
+       
+            $.getScript("https://code.jquery.com/ui/1.12.1/jquery-ui.js", function () {
+                $(".draggable").sortable();
+            })
+      
+
+
+        $(".EditSubDir").click(function () {
+            $(this).parent().siblings().children().css("display", "inline-block");
+            $(this).parent().siblings().children("label").css("display", "none");
+            $(this).css("display", "none");
+            $(this).siblings(".EditSubDirA").css("display", "inline-block");
+
+
+        });
+
+
+        $(".EditFile").click(function () {
+            var root = $(this).parent().siblings().children().children().css("display", "inline-block");
+            var root1 = $(this).parent().siblings().children().children("label").css("display", "none");
+            $(this).css("display", "none");
+            $(this).siblings(".EditFileA").css("display", "inline-block");
+            //$(".EditFileA").css("display", "inline");
+
+        });
+
+
+       
+
+
+        $('.video').click(function () {
+
+            var root = $("#rootName").val();
+            var subf = $(this).parent().parent().attr('id');
+            var vi = $(this).attr('title');
+            var src = "/assets/videos/" + root + "/" + subf + "/" + vi;
+            $('#vemvo-player').attr("src", src);
+        });
+
+
+        var rootTitle = $("#rootTitle").val();
+        $("#CourseTitle").val(rootTitle);
+        $("#AddNewfile").click(function () {
+            var SubDirTitle = $(this).parent().siblings().children('.heading').val();
+            alert(SubDirTitle);
+        });
+
+    });
+</script>

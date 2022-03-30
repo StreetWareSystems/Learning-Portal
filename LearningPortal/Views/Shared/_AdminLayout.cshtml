@@ -1,0 +1,253 @@
+﻿@using Microsoft.AspNet.Identity
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible"
+          content="IE=edge">
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+
+    <!-- Prevent the demo from appearing in search engines (REMOVE THIS) -->
+    <meta name="robots"
+          content="noindex">
+
+    <!-- Custom Fonts -->
+    <link href="https://fonts.googleapis.com/css?family=Oswald:400,500,700%7CRoboto:400,500%7CRoboto:400,500&display=swap"
+          rel="stylesheet">
+
+    <!-- Perfect Scrollbar -->
+    <link type="text/css"
+          href="~/assets/vendor/perfect-scrollbar.css"
+          rel="stylesheet">
+
+    <!-- Material Design Icons -->
+    <link type="text/css"
+          href="~/assets/css/material-icons.css"
+          rel="stylesheet">
+
+    <!-- Font Awesome Icons -->
+    <link type="text/css"
+          href="~/assets/css/fontawesome.css"
+          rel="stylesheet">
+
+    <!-- Preloader -->
+    <link type="text/css"
+          href="~/assets/vendor/spinkit.css"
+          rel="stylesheet">
+
+    <!-- App CSS -->
+    <link type="text/css"
+          href="~/assets/css/app.css"
+          rel="stylesheet">
+    <link rel="stylesheet"
+          href="~/assets/css/dropdown.css">
+    <link type="text/css"
+          href="~/assets/css/quill.css"
+          rel="stylesheet">
+
+    <link rel="stylesheet"
+          href="~/assets/css/nestable.css">
+    <link rel="stylesheet"
+          href="~/assets/css/Course.css">
+    <link href="https://fonts.googleapis.com/css?family=Cabin:400,700" rel="stylesheet">
+
+    <!-- Custom stlylesheet -->
+    <link type="text/css" rel="stylesheet" href="~/assets/css/Error404.css" />
+
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.5.0/css/bootstrap-datepicker.css" rel="stylesheet">
+
+    <link rel="stylesheet" href="~/assets/css/carousel.css">
+
+    <link rel="stylesheet" href="~/Content/style.css">
+    <style>
+    </style>
+
+
+    <!-- jQuery -->
+    <script src="~/assets/vendor/jquery.min.js"></script>
+
+</head>
+<body>
+    <script>
+        $('html, body').css({ 'overflow': 'hidden', 'height': '100%' })
+    </script>
+    <div id="loading">
+        <div class="sk-chase">
+            <div class="sk-chase-dot"></div>
+            <div class="sk-chase-dot"></div>
+            <div class="sk-chase-dot"></div>
+            <div class="sk-chase-dot"></div>
+            <div class="sk-chase-dot"></div>
+            <div class="sk-chase-dot"></div>
+        </div>
+
+    </div>
+    <div class="mdk-header-layout js-mdk-header-layout">
+        <!-- Header -->
+
+        <div id="header" data-fixed class="mdk-header js-mdk-header mb-0">
+            <div class="mdk-header__content">
+
+                <!-- Navbar -->
+                <nav class="navbar navbar-expand navbar-dark bg-dark m-0">
+                    <div class="container-fluid">
+                        <!-- Toggle sidebar -->
+                        <button class="navbar-toggler d-block" data-toggle="sidebar" type="button">
+                            <span class="material-icons">menu</span>
+                        </button>
+
+                        <!-- Brand -->
+                        <a href="@Url.Action("AddCourse", "Admin")"
+                           class="navbar-brand">
+
+
+                            <img src="~/assets/images/white.png"
+                                 class="mr-2"
+                                 alt="LearnPlus" />
+                            <span class="d-none d-xs-md-block">LearnPlus</span>
+
+                        </a>
+
+                        <div class="flex"></div>
+
+
+
+                        <!-- Menu -->
+
+                        @Html.Partial("_LoginPartial")
+                        <!-- // END Menu -->
+                    </div>
+                </nav>
+                <!-- // END Navbar -->
+
+            </div>
+        </div>
+
+        <!-- // END Header -->
+        <div id="videoModalWrapper"></div>
+        <div id="modalWrapperDelete"> </div>
+        <div id="modalWrapperEdit"></div>
+        <div id="modalWrapperDeleteCourse"></div>
+        <div class="modal fade" id="exampleModal" style="height:100vh;width:100vw">
+            <div class="modal-dialog vc-modal m-0">
+                <div class="modal-content">
+                    <div class="modal-header modal-header-vc">
+
+                        <button type="button" class="close ml-2" data-dismiss="modal" id="close">&times;</button>
+                    </div>
+
+                    <div class="modal-body">
+                        <video id="vemvo-player" controls width="100%" height="100%" src="~/assets/">
+                        </video>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+        <!-- Header Layout Content -->
+        <div class="mdk-header-layout__content">
+
+            <div data-push data-responsive-width="992px" class="mdk-drawer-layout js-mdk-drawer-layout" id="upperdata">
+
+                @RenderBody()
+
+
+                <div class="mdk-drawer js-mdk-drawer" id="default-drawer">
+                    <div class="mdk-drawer__content ">
+                        <div class="sidebar sidebar-left sidebar-dark bg-dark o-hidden" data-perfect-scrollbar>
+                            <div class="sidebar-p-y">
+                                <div style="align-items:center">
+                                    <div class="sidebar-heading" style="text-align:left;"><a href="@Url.Action("AddCourse", "Admin")"><i class="material-icons" style=" margin-right: 20px">receipt</i>Courses</a></div>
+                                    <div class="flex"></div>
+                                    <div class="sidebar-heading" style="text-align: left"><a href="@Url.Action("AddCategory", "Admin")"><i class="material-icons" style=" margin-right: 20px">format_align_justify</i>Categories</a></div>
+                                    <div class="flex"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- App Settings FAB -->
+    <div id="app-settings" class="d-none">
+        <app-settings layout-active="default" :layout-location="{
+      'fixed': 'fixed-student-dashboard.html',
+      'default': 'student-dashboard.html'
+    }" sidebar-variant="bg-transparent border-0"></app-settings>
+    </div>
+
+    <script src="~/assets/vendor/quill.min.js"></script>
+    <script src="~/assets/js/quill.js"></script>
+
+    <script>
+
+
+
+        $(document).ready(function () {
+            //$(function () {
+            //    alert("admin");
+            //    $(".idpakar").sortable();
+            //    $(".idpakar").disableSelection();
+            //});
+            preloaderFadeOutTime = 500;
+            function hidePreloader() {
+                var preloader = $('#loading');
+                preloader.fadeOut(preloaderFadeOutTime);
+            }
+            hidePreloader();
+            $('html, body').removeAttr('style');
+            //video modal closing
+            $("#close").click(function () {
+                $('#exampleModal').modal('hide');
+                $("#vemvo-player").trigger('pause');
+
+            });
+        })
+    </script>
+    <!-- Bootstrap -->
+    <script src="~/assets/vendor/popper.min.js"></script>
+    <script src="~/assets/vendor/bootstrap.min.js"></script>
+
+    <!-- Perfect Scrollbar -->
+    <script src="~/assets/vendor/perfect-scrollbar.min.js"></script>
+
+    <!-- MDK -->
+    <script src="~/assets/vendor/dom-factory.js"></script>
+    <script src="~/assets/vendor/material-design-kit.js"></script>
+
+    <!-- App JS -->
+    <script src="~/assets/js/app.js"></script>
+
+    <!-- Highlight.js -->
+    <script src="~/assets/js/hljs.js"></script>
+
+    <!-- App Settings (safe to remove) -->
+    <script src="~/assets/js/app-settings.js"></script>
+
+    <!-- Global Settings -->
+    <script src="~/assets/js/settings.js"></script>
+
+    <!-- Moment.js -->
+    <script src="~/assets/vendor/moment.min.js"></script>
+    <script src="~/assets/vendor/moment-range.js"></script>
+
+    @*<script src="~/assets/vendor/jquery.nestable.js"></script>
+        <script src="~/assets/js/nestable.js"></script>*@
+
+
+    <script src="~/assets/js/admin.js"></script>
+    <script src="~/assets/js/carousel.js"></script>
+    <!-- Year Picker Js -->
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.5.0/js/bootstrap-datepicker.js"></script>
+
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+
+</body>
+</html>
+
+

@@ -1,0 +1,378 @@
+﻿@model LearningPortal.Models.Courses
+@using Microsoft.AspNet.Identity
+
+@{
+    ViewBag.Title = "Course";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<title>@Model.CourseName </title>
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+
+<script src="https://vjs.zencdn.net/5.16/video.js"></script>
+<script src="https://cdn.rawgit.com/videojs/videojs-youtube/master/src/Youtube.js"></script>
+<script src="https://rawgit.com/atlance01/vrapp-ionic/master/www/js/lib/videojs-playlist.js"></script>
+
+<style>
+    .DROPP {
+        display: contents;
+        align-items: center;
+        font-weight: 400;
+        line-height: 42px;
+        font-size: 15px;
+    }
+
+    .DROP {
+        padding-top: 0.5rem;
+    }
+
+    .ytp-title-channel-logo {
+        display: none;
+    }
+
+    .menu-button {
+        cursor: pointer;
+    }
+
+    .dropdown-menu {
+        width: 100%;
+        border: 0;
+    }
+
+        .dropdown-menu:after {
+        }
+
+    [dir] .dropdown-menu.show, [dir] .show > .dropdown-menu {
+        margin-top: 0.4rem !important;
+    }
+
+    [dir] .dropdown-menu:after, [dir] .dropdown-menu:before {
+        border: 8px solid transparent;
+        border: 1px solid transparent;
+    }
+
+    .sidebar-menu-item .sidebar-menu-button {
+        margin: 0px;
+    }
+
+    .sidebar {
+        height: auto;
+    }
+
+        .sidebar .sidebar-menu-item {
+            padding: 10px;
+        }
+
+            .sidebar .sidebar-menu-item a {
+                width: auto;
+                padding-left: 0 !important;
+            }
+
+            .sidebar .sidebar-menu-item .sidebar-menu-button i {
+                margin: 0;
+            }
+    
+</style>
+@{string que3 = helpper.Encrypt("" + Html.DisplayFor(model => model.SubCategories.CategoryId), true);
+
+    que3 = que3.Replace('%', 'a');
+    que3 = que3.Replace('+', 'b');
+    string que4 = helpper.Encrypt("" + Html.DisplayFor(model => model.SubCategoryId), true);
+
+    que4 = que4.Replace('%', 'a');
+    que4 = que4.Replace('+', 'b');
+
+    <div class="mdk-header-layout__content">
+
+
+
+        <div data-push
+             data-responsive-width="992px"
+             class="mdk-drawer-layout js-mdk-drawer-layout">
+            <div class="mdk-drawer-layout__content page ">
+
+                <div class="container page__container">
+                    <section id="goup1">
+
+                        <ol class="breadcrumb">
+                            <li class="breadcrumb-item"><a href="@Url.Action("ViewAllSubCategory", "Home", new { id = que3.Replace('/', '$') })">@Html.DisplayFor(model => model.SubCategories.Categories.CategoryName)</a></li>
+                            <li class="breadcrumb-item"><a href="@Url.Action("ViewAllCourse", "Home", new { id = que4.Replace('/', '$') })">@Html.DisplayFor(model => model.SubCategories.SubCategoryName)</a></li>
+                            <li class="breadcrumb-item active">@Html.DisplayFor(model => model.CourseName)</li>
+
+                        </ol>
+                    </section>
+                    @Html.HiddenFor(x => x.CourseId)
+
+
+                    <div class="row">
+                        @if (ViewBag.check == 0)
+                        {
+                            <div class="col-md-7 d-flex">
+                                <h2> No Video</h2>
+                            </div>
+                        }
+                        else
+                        {
+
+                            <div class="col-md-8">
+                                @*Videowork starts here:*@
+                                @*Videowork starts here:*@
+                                @{
+                                    int smid = ViewBag.v;
+                                    if (smid != 0)
+                                    {
+                                        var cid1 = Html.DisplayFor(model => model.CourseId);
+                                        <section id="goup">
+                                            <div class="card" id="video-card">
+
+                                                @{Html.RenderAction("videoplayer", "Home", new { cid = cid1, sid = Convert.ToInt32(smid) });}
+
+                                            </div>
+                                        </section>
+                                        @Html.Hidden("smid", smid)
+                                        @*end of video*@
+
+                                        <!-- Lessons -->
+                                        <h4 class="fonts">Course Outline</h4>
+                                        <p>@ViewBag.data -  @{Html.RenderAction("FormatTime", "Home", new { time = ViewBag.totalduration });} Duration </p>
+
+
+
+                                        <div class="sidebar">
+
+                                            <ul class="sidebar-menu">
+                                                @foreach (var item in Model.Sections)
+                                                {
+                                                    <li class="sidebar-menu-item1">
+                                                        @{
+                                                            string str = item.SectionName;
+                                                            str = str.Replace(" ", "");
+                                                        }
+                                                        <a class="sidebar-menu-button sidebar-js-collapse DROPP"
+                                                           data-toggle="collapse"
+                                                           href="#@str">
+                                                            <div class="media">
+
+                                                                <div class="media-left DROP">
+
+                                                                    <i class="sidebar-menu-icon sidebar-menu-icon--left fa fa-caret-down"></i>
+
+
+                                                                </div>
+
+                                                                <div class="media-body">
+
+                                                                    @Html.DisplayFor(modelitem => item.SectionName)
+                                                                </div>
+                                                                <div class="media-right">
+                                                                    <small class="text-muted-light">@item.SectionMedia.Count() Videos -     @{Html.RenderAction("FormatTime", "Home", new { time = item.SectionMedia.Sum(x => x.VideoDuration) });}   Duration</small>
+                                                                </div>
+                                                            </div>
+                                                        </a>
+                                                        <ul class="sidebar-submenu sm-indent collapse"
+                                                            id="@str">
+
+
+                                                            @Html.Hidden("CourseId", helpper.Encrypt("" + item.CourseId, true))
+                                                            @foreach (var item1 in item.SectionMedia)
+                                                            {
+                                                                // string que = helpper.Encrypt("" + item1.SectionMediaId, true);
+                                                                //  var que = item1.SectionMediaId;
+                                                                // @Html.Hidden("SectionMediaId", que)
+
+                                                                <li class="sidebar-menu-item">
+
+                                                                    <div class="media  DROPP">
+                                                                        <a class="sidebar-menu-button menu-button" id="@item1.SectionMediaId" @*href="@Url.Action("StudentCourse", "Home", new { id = item.CourseId, sid = que })"*@>
+
+                                                                            <div class="media-left DROP">
+
+                                                                                @{
+                                                                                    var aa = item1.UserMediaHistories.Where(x => x.UserId == User.Identity.GetUserId()).ToList();
+
+                                                                                    if (aa.Count == 0)
+                                                                                    {
+                                                                                        <i class="material-icons text-muted pr-2">play_circle_filled</i>
+                                                                                    }
+                                                                                    else
+                                                                                    {
+                                                                                        foreach (var item2 in aa)
+                                                                                        {
+                                                                                            var start = item2.WatchedTime;
+
+                                                                                            if (item1.VideoDuration == start)
+                                                                                            {
+                                                                                                <i class="material-icons text-muted pr-2">check_circle</i>
+                                                                                            }
+                                                                                            else
+                                                                                            {
+                                                                                                if (start == 0)
+                                                                                                {
+                                                                                                    <i class="material-icons text-muted pr-2">play_circle_filled</i>
+                                                                                                }
+                                                                                                else
+                                                                                                {
+                                                                                                    <i class="material-icons text-muted pr-2">pause_circle_filled</i>
+                                                                                                }
+                                                                                            }
+
+
+                                                                                        }
+
+                                                                                    }
+                                                                                }
+
+                                                                            </div>
+                                                                            <div class="media-body">
+                                                                                <p>@Html.DisplayFor(modelitem => item1.VideoTitle)</p>
+
+                                                                            </div>
+                                                                            <div class="media-right">
+                                                                                <small class="text-muted-light">
+                                                                                    @{Html.RenderAction("FormatTime", "Home", new { time = item1.VideoDuration });}
+                                                                                </small>
+
+                                                                            </div>
+                                                                        </a>
+                                                                    </div>
+
+                                                                </li>
+
+                                                            }
+                                                        </ul>
+
+                                                    </li>
+                                                }
+                                            </ul>
+                                        </div>
+                                    }
+                                    else
+                                    {
+                                    }
+                                }
+                            </div>
+                        }
+                        <div class="col-md-4">
+
+                            <div class="card">
+                                <div class="card-header">
+                                    <div class="media align-items-center">
+                                        <div class="media-left">
+                                            <img src="~/assets/images/@Model.Image"
+                                                 width="50"
+                                                 class="rounded-circle">
+                                        </div>
+                                        <div class="media-body">
+                                            <h4 class="card-title">@Model.CourseName</h4>
+
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="card-body">
+                                    <p style="text-align:justify; font-size:14px;">@Model.Description</p>
+
+                                </div>
+                            </div>
+
+                            <div class="card">
+                                <ul class="list-group list-group-fit">
+                                    <li class="list-group-item">
+                                        <div class="media align-items-center">
+                                            <div class="media-left">
+                                                <i class="material-icons text-muted-light">assessment</i>
+                                            </div>
+                                            <div class="media-body">
+                                                @Model.Levels
+                                            </div>
+                                        </div>
+                                    </li>
+                                    <li class="list-group-item">
+                                        <div class="media align-items-center">
+                                            <div class="media-left">
+                                                <i class="material-icons text-muted-light">schedule</i>
+                                            </div>
+                                            <div class="media-body">
+                                                @{Html.RenderAction("FormatTime", "Home", new { time = ViewBag.totalduration });}
+                                            </div>
+                                        </div>
+                                    </li>
+                                </ul>
+                            </div>
+                            <div class="card">
+                                <div class="card-header">
+                                    <div class="media align-items-center">
+                                        <div class="media-left">
+
+                                        </div>
+                                        <div class="media-body">
+                                            <h4 class="fonts">What will you learn</h4>
+
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="card-body">
+                                    <div class="row">
+
+                                        @foreach (var item in Model.CourseLearnings)
+                                        {
+                                            <div class="col-lg-12 mt-3 courelearningdata">
+                                                <p style="font-size:14px;">  <i class="fa fa-check pr-2"></i>@item.Description</p>
+                                            </div>
+                                        }
+
+
+                                    </div>
+
+                                </div>
+                            </div>
+
+
+                            <div class="card">
+
+                                <div class="card-header align-items-center">
+                                    <i class="material-icons text-muted ml-2">lightbulb </i><a href="#"> Take Quiz</a>
+                                </div>
+                                <div class="card-header align-items-center">
+                                    <i class="material-icons text-muted ml-2">assignment</i><a href="#">  Get Assignment</a>
+                                </div>
+                                <div class="card-header align-items-center">
+                                    <i class="material-icons text-muted ml-2">school</i><a href="#">  Get Certificate</a>
+                                </div>
+                            </div>
+
+
+                        </div>
+                    </div>
+                </div>
+
+
+            </div>
+        </div>
+    </div>
+
+}
+<script src="~/assets/js/data.js"></script>
+
+
+<script src="~/assets/vendor/jquery.min.js"></script>
+<script>
+    $(document).ready(function () {
+
+        var id = $('#smid').val();
+
+        var id2 = $('#' + id).parent().parent().parent().attr('id');
+       
+        $('#' + id2).collapse('show');
+
+        $('#' + id).parent().parent().css("background-color", "#667a8a");
+
+
+
+
+        $('#' + id).parent().parent().parent().children().children().children().css("color", "white");
+
+       
+    });
+</script>
